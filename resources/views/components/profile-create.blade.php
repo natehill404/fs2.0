@@ -1,216 +1,216 @@
 @push('styles')
-<style>
-    .modal-actions button.btn-tabs.active {
-        border-bottom: 2px solid var(--primary);
-    }
-
-    .modal-actions button.btn-tabs {
-        outline: none;
-    }
-
-    .modal-actions button.btn-tabs:hover,
-    .modal-actions button.btn-tabs:active {
-        outline: none;
-    }
-
-    .profile-change-card {
-        width: 90%;
-        max-width: unset;
-        overflow-x: hidden;
-        overflow-y: clip;
-    }
-
-</style>
-
-<link rel="stylesheet" href="{{asset("js/cropper/cropper.min.css")}}">
-<style>
-    body {
-        position: relative;
-        min-height: 100vh;
-    }
-
-    .model {
-        position: absolute;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: rgb(148 147 147 / 32%);
-    }
-
-    .model .model-inner {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: start;
-        height: 70%;
-        width: 70%;
-        background-color: white;
-    }
-
-    .btn.btn-sm.btn-success {
-        background-image: linear-gradient(#ff6961, #ffa500f7);
-        border-color: #ff6961;
-    }
-
-    @media(max-width: 1200px) {
-        .model .model-inner {
-            width: clamp(95%, 90%, 90%);
-        }
-    }
-
-    .model .model-inner .image-div img {
-        max-width: 100%;
-        height: 100%;
-        object-fit: contain;
-    }
-
-    .model .model-inner .image-div {
-        width: 100%;
-        height: 80%;
-    }
-
-    .cropper-view-box,
-    .cropper-face {
-        border-radius: 50%;
-    }
-
-    #gerenal-info {
-        width: 100%;
-        position: absolute;
-        top: 0;
-        transition: all 500ms linear;
-        transform: translateX(100%);
-    }
-
-    #add-friend {
-        width: 100%;
-        position: absolute;
-        top: 0;
-        transition: all 500ms linear;
-        transform: translateX(100%);
-    }
-
-    #gerenal-info label {
-        font-weight: 600;
-        font-size: 1.1rem;
-        width: 100%;
-        text-align: center;
-    }
-
-    #profile-pic-div {
-        transition: all 500ms linear;
-    }
-
-    #add-friend .add-friend-btn {
-        background: linear-gradient(180deg, rgb(242, 137, 56), rgb(239 59 117));
-        color: black;
-        font-size: 1rem;
-    }
-
-    button.btn-tabs {
-        width: 100%;
-        border: none !important;
-        background: #f3f3f3;
-        margin: 10px;
-        padding: 10px 35px;
-    }
-
-    button.btn-tabs.active {
-        background: linear-gradient(#ff6961, #ffa500f7) !important;
-    }
-
-    button.btn-next-step {
-        background: linear-gradient(#ff6961, #ffa500f7) !important;
-
-    }
-
-    .profile-change-card .card-header {
-        background: white;
-    }
-
-    @media(max-width: 700px) {
-        .modal-actions {
-            display: grid !important;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr 1fr;
+    <style>
+        .modal-actions button.btn-tabs.active {
+            border-bottom: 2px solid var(--primary);
         }
 
-        .modal-actions>button#btn-tab-1 {
-            grid-column-start: 1;
-            grid-column-end: 3;
+        .modal-actions button.btn-tabs {
+            outline: none;
         }
 
-        button.btn-tabs {
-            width: unset;
-        }
-
-        #result-image {
-            width: 200px;
-            height: 200px;
+        .modal-actions button.btn-tabs:hover,
+        .modal-actions button.btn-tabs:active {
+            outline: none;
         }
 
         .profile-change-card {
-            width: 98%;
-        }
-    }
-
-    @media(max-width: 500px) {
-        .modal-actions {
-            grid-template-columns: 1fr;
-            grid-template-rows: 1fr 1fr 1fr;
+            width: 90%;
+            max-width: unset;
+            overflow-x: hidden;
+            overflow-y: clip;
         }
 
-        .modal-actions>button#btn-tab-1 {
-            grid-column-start: initial;
-            grid-column-end: initial;
+    </style>
+
+    <link rel="stylesheet" href="{{asset("js/cropper/cropper.min.css")}}">
+    <style>
+        body {
+            position: relative;
+            min-height: 100vh;
         }
-    }
 
-    .btn-tabs:focus {
-        box-shadow: none;
-    }
+        .model {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(148 147 147 / 32%);
+        }
 
-    #image {
-        position: absolute;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        bottom: 5%;
-        right: 5%;
-    }
+        .model .model-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: start;
+            height: 70%;
+            width: 70%;
+            background-color: white;
+        }
 
-    input#image::after {
-        position: absolute;
-        content: '\f030';
-        font-size: 1.5rem;
-        height: 100%;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: orange;
-        color: white;
-        top: 0;
-        left: 0;
-        font-weight: 900;
-        font-family: 'Font Awesome 5 Free';
-    }
+        .btn.btn-sm.btn-success {
+            background-image: linear-gradient(#ff6961, #ffa500f7);
+            border-color: #ff6961;
+        }
 
-    .heading-small {
-        color: #e25865;
-        text-align: left;
-        font-size: 1.2rem;
-        padding: 4px 0;
-        letter-spacing: .04em;
-        text-transform: uppercase;
-    }
+        @media (max-width: 1200px) {
+            .model .model-inner {
+                width: clamp(95%, 90%, 90%);
+            }
+        }
 
-    .mb20 {
-        margin-bottom: 0;
-        margin-top: 40px;
-    }
+        .model .model-inner .image-div img {
+            max-width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
 
-</style>
+        .model .model-inner .image-div {
+            width: 100%;
+            height: 80%;
+        }
+
+        .cropper-view-box,
+        .cropper-face {
+            border-radius: 50%;
+        }
+
+        #gerenal-info {
+            width: 100%;
+            position: absolute;
+            top: 0;
+            transition: all 500ms linear;
+            transform: translateX(100%);
+        }
+
+        #add-friend {
+            width: 100%;
+            position: absolute;
+            top: 0;
+            transition: all 500ms linear;
+            transform: translateX(100%);
+        }
+
+        #gerenal-info label {
+            font-weight: 600;
+            font-size: 1.1rem;
+            width: 100%;
+            text-align: center;
+        }
+
+        #profile-pic-div {
+            transition: all 500ms linear;
+        }
+
+        #add-friend .add-friend-btn {
+            background: linear-gradient(180deg, rgb(242, 137, 56), rgb(239 59 117));
+            color: black;
+            font-size: 1rem;
+        }
+
+        button.btn-tabs {
+            width: 100%;
+            border: none !important;
+            background: #f3f3f3;
+            margin: 10px;
+            padding: 10px 35px;
+        }
+
+        button.btn-tabs.active {
+            background: linear-gradient(#ff6961, #ffa500f7) !important;
+        }
+
+        button.btn-next-step {
+            background: linear-gradient(#ff6961, #ffa500f7) !important;
+
+        }
+
+        .profile-change-card .card-header {
+            background: white;
+        }
+
+        @media (max-width: 700px) {
+            .modal-actions {
+                display: grid !important;
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 1fr 1fr;
+            }
+
+            .modal-actions > button#btn-tab-1 {
+                grid-column-start: 1;
+                grid-column-end: 3;
+            }
+
+            button.btn-tabs {
+                width: unset;
+            }
+
+            #result-image {
+                width: 200px;
+                height: 200px;
+            }
+
+            .profile-change-card {
+                width: 98%;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .modal-actions {
+                grid-template-columns: 1fr;
+                grid-template-rows: 1fr 1fr 1fr;
+            }
+
+            .modal-actions > button#btn-tab-1 {
+                grid-column-start: initial;
+                grid-column-end: initial;
+            }
+        }
+
+        .btn-tabs:focus {
+            box-shadow: none;
+        }
+
+        #image {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            bottom: 5%;
+            right: 5%;
+        }
+
+        input#image::after {
+            position: absolute;
+            content: '\f030';
+            font-size: 1.5rem;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: orange;
+            color: white;
+            top: 0;
+            left: 0;
+            font-weight: 900;
+            font-family: 'Font Awesome 5 Free';
+        }
+
+        .heading-small {
+            color: #e25865;
+            text-align: left;
+            font-size: 1.2rem;
+            padding: 4px 0;
+            letter-spacing: .04em;
+            text-transform: uppercase;
+        }
+
+        .mb20 {
+            margin-bottom: 0;
+            margin-top: 40px;
+        }
+
+    </style>
 @endpush
 
 <div class="card profile-change-card">
@@ -223,19 +223,32 @@
     </div>
     <div class="card-body" style="overflow-x: hidden;">
         <div id="profile-pic-div" style="width: 100%">
-            <div class="form-group row justify-content-center align-items-center" style="vertical-align: middle; font-family: 'Montserrat', sans-serif;">
-                <strong style="color: #e04e5c; font-size: 2rem; margin-right: 20px; font-weight: 700;">Welcome</strong> <span style="font-size: 1.9rem; color: #007bff; font-weight: 500;"> {{explode(" ", trim(Auth::user()->name))[0]}}</span>
+            <div class="form-group row justify-content-center align-items-center"
+                 style="vertical-align: middle; font-family: 'Montserrat', sans-serif;">
+                <strong style="color: #e04e5c; font-size: 2rem; margin-right: 20px; font-weight: 700;">Welcome</strong>
+                <span
+                    style="font-size: 1.9rem; color: #007bff; font-weight: 500;"> {{explode(" ", trim(Auth::user()->name))[0]}}</span>
             </div>
             <p style="color: #e04e5c; text-align: center;font-size: 1.1rem;">Lets start with you profile</p>
 
             <div class="form-group mt-5 row justify-content-center">
                 <div class="position-relative">
-                    @if(Auth::user()->gender === "male")
-                    <img src="{{asset('storage/images/static/blank_profile_male.jpg')}}" id="result-image" alt="Profile Pic" width="250" height="250" style="border-radius: 50%; border: 1px solid gray;padding: 2px;">
+                    @if(Auth::user()->image)
+                        <img src="{{asset('storage/images/users/'.Auth::user()->image)}}" id="result-image"
+                             alt="Profile Pic" width="250" height="250"
+                             style="border-radius: 50%; border: 1px solid gray;padding: 2px;">
+                    @elseif(Auth::user()->gender === "male")
+                        <img src="{{asset('img/profile/male.png')}}" id="result-image"
+                             alt="Profile Pic" width="250" height="250"
+                             style="border-radius: 50%; border: 1px solid gray;padding: 2px;">
                     @elseif(Auth::user()->gender === "female")
-                    <img src="{{asset('storage/images/static/blank_profile_female.jpg')}}" id="result-image" alt="Profile Pic" width="250" height="250" style="border-radius: 50%; border: 1px solid gray;padding: 2px;">
+                        <img src="{{asset('img/profile/female.jpg')}}" id="result-image"
+                             alt="Profile Pic" width="250" height="250"
+                             style="border-radius: 50%; border: 1px solid gray;padding: 2px;">
                     @else
-                    <img src="{{asset('storage/images/static/default_profile.jpg')}}" id="result-image" alt="Profile Pic" width="250" height="250" style="border-radius: 50%; border: 1px solid gray;padding: 2px;">
+                        <img src="{{asset('img/profile/default.png')}}" id="result-image"
+                             alt="Profile Pic" width="250" height="250"
+                             style="border-radius: 50%; border: 1px solid gray;padding: 2px;">
                     @endif
                     <input type="file" id="image">
                 </div>
@@ -253,7 +266,8 @@
                         Location
                     </div>
                     <div class="pl-md-4">
-                        <div class="form-group"> <label class="form-control-label" for="country">Country</label> <select class="form-control" name="country" id="country">
+                        <div class="form-group"><label class="form-control-label" for="country">Country</label> <select
+                                class="form-control" name="country" id="country">
                                 <option value="230">United States</option>
                                 <option value="1">Afghanistan</option>
                                 <option value="2">Albania</option>
@@ -500,10 +514,20 @@
                                 <option value="243">Zaire</option>
                                 <option value="244">Zambia</option>
                                 <option value="245">Zimbabwe</option>
-                            </select> </div>
+                            </select></div>
                         <div class="row">
-                            <div class="form-group col-md-6"> <label class="form-control-label" for="city">Current City</label> <input type="text" placeholder="Current City" class="form-control js_geocomplete" name="city" id="city" value=""> </div>
-                            <div class="form-group col-md-6"> <label class="form-control-label" for="hometown">Hometown</label> <input type="text" placeholder="Hometown" class="form-control js_geocomplete" name="hometown" id="hometown" value=""> </div>
+                            <div class="form-group col-md-6"><label class="form-control-label" for="city">Current
+                                    City</label> <input type="text" placeholder="Current City"
+                                                        class="form-control js_geocomplete" name="city" id="city"
+                                                        value=""></div>
+                            <div class="form-group col-md-6"><label class="form-control-label"
+                                                                    for="hometown">Hometown</label> <input type="text"
+                                                                                                           placeholder="Hometown"
+                                                                                                           class="form-control js_geocomplete"
+                                                                                                           name="hometown"
+                                                                                                           id="hometown"
+                                                                                                           value="">
+                            </div>
                         </div>
                     </div>
                     <div class="divider"></div>
@@ -511,10 +535,16 @@
                         Work
                     </div>
                     <div class="pl-md-4">
-                        <div class="form-group"> <label class="form-control-label" for="work_title">Work Title</label> <input type="text" class="form-control" placeholder="Work Title" name="work_title" id="work_title" value=""> </div>
+                        <div class="form-group"><label class="form-control-label" for="work_title">Work Title</label>
+                            <input type="text" class="form-control" placeholder="Work Title" name="work_title"
+                                   id="work_title" value=""></div>
                         <div class="row">
-                            <div class="form-group col-md-6"> <label class="form-control-label" for="work_place">Work Place</label> <input type="text" class="form-control" placeholder="Work Place" name="work_place" id="work_place" value=""> </div>
-                            <div class="form-group col-md-6"> <label class="form-control-label" for="work_url">Work Website</label> <input type="text" class="form-control" placeholder="Work Website" name="work_url" id="work_url" value=""> </div>
+                            <div class="form-group col-md-6"><label class="form-control-label" for="work_place">Work
+                                    Place</label> <input type="text" class="form-control" placeholder="Work Place"
+                                                         name="work_place" id="work_place" value=""></div>
+                            <div class="form-group col-md-6"><label class="form-control-label" for="work_url">Work
+                                    Website</label> <input type="text" class="form-control" placeholder="Work Website"
+                                                           name="work_url" id="work_url" value=""></div>
                         </div>
                     </div>
                     <div class="divider"></div>
@@ -522,10 +552,25 @@
                         Education
                     </div>
                     <div class="pl-md-4">
-                        <div class="form-group"> <label class="form-control-label" for="edu_major">Major</label> <input type="text" class="form-control" placeholder="Major" name="edu_major" id="edu_major" value=""> </div>
+                        <div class="form-group"><label class="form-control-label" for="edu_major">Major</label> <input
+                                type="text" class="form-control" placeholder="Major" name="edu_major" id="edu_major"
+                                value=""></div>
                         <div class="row">
-                            <div class="form-group col-md-6"> <label class="form-control-label" for="edu_school">School</label> <input type="text" class="form-control" placeholder="School" name="edu_school" id="edu_school" value=""> </div>
-                            <div class="form-group col-md-6"> <label class="form-control-label" for="edu_class">Class</label> <input type="text" class="form-control" placeholder="Class" name="edu_class" id="edu_class" value=""> </div>
+                            <div class="form-group col-md-6"><label class="form-control-label"
+                                                                    for="edu_school">School</label> <input type="text"
+                                                                                                           class="form-control"
+                                                                                                           placeholder="School"
+                                                                                                           name="edu_school"
+                                                                                                           id="edu_school"
+                                                                                                           value="">
+                            </div>
+                            <div class="form-group col-md-6"><label class="form-control-label"
+                                                                    for="edu_class">Class</label> <input type="text"
+                                                                                                         class="form-control"
+                                                                                                         placeholder="Class"
+                                                                                                         name="edu_class"
+                                                                                                         id="edu_class"
+                                                                                                         value=""></div>
                         </div>
                     </div>
                 </div>
@@ -537,70 +582,37 @@
                 <strong style="font-size: 1.5rem;font-weight:600;color:rgb(237, 126, 42);">Add Friends</strong>
             </div>
             <div class="friends d-flex flex-wrap mt-4" style="gap: 20px;">
-                <div class="firend card">
-                    <div class="card-body m-2 d-flex flex-column align-items-center">
-                        <img width="100" height="100" style="border-radius: 50%;" src="{{asset('storage/images/static/blank_profile_male.jpg')}}" alt="User Image">
-                        <strong class="friend-name m-2" style="font-size: 1rem;font-weight:600;color:rgb(242, 137, 56);">Hira Asif</strong>
-                        <button type="button" class="btn btn-sm btn-success js_friend-add" data-uid="12"> <i class="fa fa-user-plus mr-2"></i>Add Friend </button>
+                @foreach($users as $user)
+                    <div class="firend card">
+                        <div class="card-body m-2 d-flex flex-column align-items-center">
+                            <img width="100" height="100" style="border-radius: 50%;"
+                                 src="{{asset('storage/images/users/'.$user->image)}}" alt="User Image">
+                            <strong class="friend-name m-2"
+                                    style="font-size: 1rem;font-weight:600;color:rgb(242, 137, 56);">{{$user->name}}</strong>
+                            <button onclick="addToFriend('{{$user->id}}')" type="button"
+                                    class="btn btn-sm btn-success js_friend-add" data-uid="12">
+                                @if(Auth::user()->hasSentFriendRequestTo($user))
+                                    Requested
+                                @else
+                                    <i class="fa fa-user-plus mr-2"></i>
+                                    <span id="friendship-status-{{$user->id}}">
+                                    Add Friend
+                                    @endif
+                                </span>
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <div class="firend card">
-                    <div class="card-body m-2 d-flex flex-column align-items-center">
-                        <img width="100" height="100" style="border-radius: 50%;" src="{{asset('storage/images/static/blank_profile_male.jpg')}}" alt="User Image">
-                        <strong class="friend-name m-2" style="font-size: 1rem;font-weight:600;color:rgb(242, 137, 56);">Hira Asif</strong>
-                        <button type="button" class="btn btn-sm btn-success js_friend-add" data-uid="12"> <i class="fa fa-user-plus mr-2"></i>Add Friend </button>
-                    </div>
-                </div>
-                <div class="firend card">
-                    <div class="card-body m-2 d-flex flex-column align-items-center">
-                        <img width="100" height="100" style="border-radius: 50%;" src="{{asset('storage/images/static/blank_profile_male.jpg')}}" alt="User Image">
-                        <strong class="friend-name m-2" style="font-size: 1rem;font-weight:600;color:rgb(242, 137, 56);">Hira Asif</strong>
-                        <button type="button" class="btn btn-sm btn-success js_friend-add" data-uid="12"> <i class="fa fa-user-plus mr-2"></i>Add Friend </button>
-                    </div>
-                </div>
-                <div class="firend card">
-                    <div class="card-body m-2 d-flex flex-column align-items-center">
-                        <img width="100" height="100" style="border-radius: 50%;" src="{{asset('storage/images/static/blank_profile_male.jpg')}}" alt="User Image">
-                        <strong class="friend-name m-2" style="font-size: 1rem;font-weight:600;color:rgb(242, 137, 56);">Hira Asif</strong>
-                        <button type="button" class="btn btn-sm btn-success js_friend-add" data-uid="12"> <i class="fa fa-user-plus mr-2"></i>Add Friend </button>
-                    </div>
-                </div>
-                <div class="firend card">
-                    <div class="card-body m-2 d-flex flex-column align-items-center">
-                        <img width="100" height="100" style="border-radius: 50%;" src="{{asset('storage/images/static/blank_profile_male.jpg')}}" alt="User Image">
-                        <strong class="friend-name m-2" style="font-size: 1rem;font-weight:600;color:rgb(242, 137, 56);">Hira Asif</strong>
-                        <button type="button" class="btn btn-sm btn-success js_friend-add" data-uid="12"> <i class="fa fa-user-plus mr-2"></i>Add Friend </button>
-                    </div>
-                </div>
-                <div class="firend card">
-                    <div class="card-body m-2 d-flex flex-column align-items-center">
-                        <img width="100" height="100" style="border-radius: 50%;" src="{{asset('storage/images/static/blank_profile_male.jpg')}}" alt="User Image">
-                        <strong class="friend-name m-2" style="font-size: 1rem;font-weight:600;color:rgb(242, 137, 56);">Hira Asif</strong>
-                        <button type="button" class="btn btn-sm btn-success js_friend-add" data-uid="12"> <i class="fa fa-user-plus mr-2"></i>Add Friend </button>
-                    </div>
-                </div>
-                <div class="firend card">
-                    <div class="card-body m-2 d-flex flex-column align-items-center">
-                        <img width="100" height="100" style="border-radius: 50%;" src="{{asset('storage/images/static/blank_profile_male.jpg')}}" alt="User Image">
-                        <strong class="friend-name m-2" style="font-size: 1rem;font-weight:600;color:rgb(242, 137, 56);">Hira Asif</strong>
-                        <button type="button" class="btn btn-sm btn-success js_friend-add" data-uid="12"> <i class="fa fa-user-plus mr-2"></i>Add Friend </button>
-                    </div>
-                </div>
-                <div class="firend card">
-                    <div class="card-body m-2 d-flex flex-column align-items-center">
-                        <img width="100" height="100" style="border-radius: 50%;" src="{{asset('storage/images/static/blank_profile_male.jpg')}}" alt="User Image">
-                        <strong class="friend-name m-2" style="font-size: 1rem;font-weight:600;color:rgb(242, 137, 56);">Hira Asif</strong>
-                        <button type="button" class="btn btn-sm btn-success js_friend-add" data-uid="12"> <i class="fa fa-user-plus mr-2"></i>Add Friend </button>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
 
     </div>
     <div class="card-footer d-flex justify-content-end" style="gap: 15px;">
         <button id="second-prev-btn" class="btn btn-secondary d-none">Previous</button>
-        <button id="first-next-btn" class="btn btn-primary btn-next-step">Next Step <i class="fas fa-arrow-circle-right ml-2"></i></button>
-        <button id="second-next-btn" class="btn btn-primary d-none btn-next-step">Next Step <i class="fas fa-arrow-circle-right ml-2"></i></button>
+        <button id="first-next-btn" class="btn btn-primary btn-next-step">Next Step <i
+                class="fas fa-arrow-circle-right ml-2"></i></button>
+        <button id="second-next-btn" class="btn btn-primary d-none btn-next-step">Next Step <i
+                class="fas fa-arrow-circle-right ml-2"></i></button>
         <button id="third-prev-btn" class="btn btn-secondary d-none">Previous</button>
         <button id="last-finish-btn" class="btn btn-success d-none">Finish</button>
     </div>
@@ -619,191 +631,209 @@
 </div>
 
 @push('scripts')
-<script src="{{asset("js/cropper/cropper.min.js")}}"></script>
-<script>
-    function getRoundedCanvas(sourceCanvas) {
-        var canvas = document.createElement('canvas');
-        var context = canvas.getContext('2d');
-        var width = sourceCanvas.width;
-        var height = sourceCanvas.height;
-        canvas.width = width;
-        canvas.height = height;
-        context.imageSmoothingEnabled = true;
-        context.fillStyle = "#fff"
-        context.drawImage(sourceCanvas, 0, 0, width, height);
-        context.globalCompositeOperation = 'destination-in';
-        context.beginPath();
-        context.arc(width / 2, height / 2, Math.min(width, height) / 2, 0, 2 * Math.PI, true);
-        context.fill();
-        var imgData = context.getImageData(0, 0, canvas.width, canvas.height);
-        var data = imgData.data;
-        for (var i = 0; i < data.length; i += 4) {
-            if (data[i + 3] < 255) {
-                data[i] = 255;
-                data[i + 1] = 255;
-                data[i + 2] = 255;
-                data[i + 3] = 255;
-            }
-        }
-        context.putImageData(imgData, 0, 0);
-        return canvas;
-    }
-
-    const originalUserImageSrc = document.getElementById("result-image").src;
-
-    const image = document.getElementById("image");
-    var croppable = false;
-    var cropper;
-    image.addEventListener("change", e => {
-        const [file] = image.files;
-        if (file) {
-            document.getElementById("model-image").src = URL.createObjectURL(file);
-            document.getElementById("model").classList.remove("d-none");
-            cropper = new Cropper(document.getElementById("model-image"), {
-                viewMode: 1
-                , dragMode: 'move'
-                , aspectRatio: 1
-                , ready: function() {
-                    croppable = true;
+    <script src="{{asset("js/cropper/cropper.min.js")}}"></script>
+    <script>
+        function getRoundedCanvas(sourceCanvas) {
+            var canvas = document.createElement('canvas');
+            var context = canvas.getContext('2d');
+            var width = sourceCanvas.width;
+            var height = sourceCanvas.height;
+            canvas.width = width;
+            canvas.height = height;
+            context.imageSmoothingEnabled = true;
+            context.fillStyle = "#fff"
+            context.drawImage(sourceCanvas, 0, 0, width, height);
+            context.globalCompositeOperation = 'destination-in';
+            context.beginPath();
+            context.arc(width / 2, height / 2, Math.min(width, height) / 2, 0, 2 * Math.PI, true);
+            context.fill();
+            var imgData = context.getImageData(0, 0, canvas.width, canvas.height);
+            var data = imgData.data;
+            for (var i = 0; i < data.length; i += 4) {
+                if (data[i + 3] < 255) {
+                    data[i] = 255;
+                    data[i + 1] = 255;
+                    data[i + 2] = 255;
+                    data[i + 3] = 255;
                 }
+            }
+            context.putImageData(imgData, 0, 0);
+            return canvas;
+        }
+
+        const originalUserImageSrc = document.getElementById("result-image").src;
+
+        const image = document.getElementById("image");
+        var croppable = false;
+        var cropper;
+        image.addEventListener("change", e => {
+            const [file] = image.files;
+            if (file) {
+                document.getElementById("model-image").src = URL.createObjectURL(file);
+                document.getElementById("model").classList.remove("d-none");
+                cropper = new Cropper(document.getElementById("model-image"), {
+                    viewMode: 1
+                    , dragMode: 'move'
+                    , aspectRatio: 1
+                    , ready: function () {
+                        croppable = true;
+                    }
+                });
+            } else {
+                document.getElementById("result-image").src = originalUserImageSrc;
+                document.getElementById("server-result-image").value = null;
+            }
+        });
+
+        const button = document.getElementById("crop-btn");
+        var mainCanvas;
+        button.onclick = function () {
+            var croppedCanvas;
+            var roundedCanvas;
+            var roundedImage;
+            if (!croppable) {
+                return;
+            }
+            croppedCanvas = cropper.getCroppedCanvas({
+                imageSmoothingEnabled: true
+                , fillStyle: '#fff'
+                ,
             });
-        } else {
+            roundedCanvas = getRoundedCanvas(croppedCanvas);
+            mainCanvas = roundedCanvas;
+            document.getElementById("result-image").src = roundedCanvas.toDataURL('image/jpeg', 1);
+            document.getElementById("server-result-image").value = roundedCanvas.toDataURL('image/jpeg', 1);
+            croppable = false;
+            cropper.destroy();
+            cropper = null;
+            document.getElementById("model").classList.add("d-none");
+        };
+
+        document.getElementById("cancel-btn").addEventListener("click", e => {
+            croppable = false;
+            cropper.destroy();
+            cropper = null;
+            image.value = null;
             document.getElementById("result-image").src = originalUserImageSrc;
             document.getElementById("server-result-image").value = null;
-        }
-    });
+            document.getElementById("model").classList.add("d-none");
 
-    const button = document.getElementById("crop-btn");
-    var mainCanvas;
-    button.onclick = function() {
-        var croppedCanvas;
-        var roundedCanvas;
-        var roundedImage;
-        if (!croppable) {
-            return;
-        }
-        croppedCanvas = cropper.getCroppedCanvas({
-            imageSmoothingEnabled: true
-            , fillStyle: '#fff'
-        , });
-        roundedCanvas = getRoundedCanvas(croppedCanvas);
-        mainCanvas = roundedCanvas;
-        document.getElementById("result-image").src = roundedCanvas.toDataURL('image/jpeg', 1);
-        document.getElementById("server-result-image").value = roundedCanvas.toDataURL('image/jpeg', 1);
-        croppable = false;
-        cropper.destroy();
-        cropper = null;
-        document.getElementById("model").classList.add("d-none");
-    };
-
-    document.getElementById("cancel-btn").addEventListener("click", e => {
-        croppable = false;
-        cropper.destroy();
-        cropper = null;
-        image.value = null;
-        document.getElementById("result-image").src = originalUserImageSrc;
-        document.getElementById("server-result-image").value = null;
-        document.getElementById("model").classList.add("d-none");
-
-    });
+        });
 
 
-    /* Tab navigation */
-    var currentTab = 1;
-    document.getElementById("first-next-btn").addEventListener("click", e => {
-        document.getElementById("second-prev-btn").classList.remove("d-none");
-        document.getElementById("second-next-btn").classList.remove("d-none");
-        document.getElementById("first-next-btn").classList.add("d-none");
-        document.getElementById("profile-pic-div").style.transform = "translateX(-110%)";
-        document.getElementById("profile-pic-div").style.position = "absolute";
-        document.getElementById("gerenal-info").style.transform = "translateX(0)";
-        document.getElementById("gerenal-info").style.position = "unset";
-        document.getElementById("btn-tab-1").classList.remove("active");
-        document.getElementById("btn-tab-2").classList.add("active");
-        currentTab = 2;
-    });
+        /* Tab navigation */
+        var currentTab = 1;
+        document.getElementById("first-next-btn").addEventListener("click", e => {
+            document.getElementById("second-prev-btn").classList.remove("d-none");
+            document.getElementById("second-next-btn").classList.remove("d-none");
+            document.getElementById("first-next-btn").classList.add("d-none");
+            document.getElementById("profile-pic-div").style.transform = "translateX(-110%)";
+            document.getElementById("profile-pic-div").style.position = "absolute";
+            document.getElementById("gerenal-info").style.transform = "translateX(0)";
+            document.getElementById("gerenal-info").style.position = "unset";
+            document.getElementById("btn-tab-1").classList.remove("active");
+            document.getElementById("btn-tab-2").classList.add("active");
+            currentTab = 2;
+        });
 
-    document.getElementById("second-prev-btn").addEventListener("click", e => {
-        document.getElementById("first-next-btn").classList.remove("d-none");
-        document.getElementById("second-next-btn").classList.add("d-none");
-        document.getElementById("second-prev-btn").classList.add("d-none");
-        document.getElementById("gerenal-info").style.transform = "translateX(110%)";
-        document.getElementById("gerenal-info").style.position = "absolute";
-        document.getElementById("profile-pic-div").style.position = "unset";
-        document.getElementById("profile-pic-div").style.transform = "translateX(0)";
-        document.getElementById("btn-tab-1").classList.add("active");
-        document.getElementById("btn-tab-2").classList.remove("active");
-        currentTab = 1;
-    });
+        document.getElementById("second-prev-btn").addEventListener("click", e => {
+            document.getElementById("first-next-btn").classList.remove("d-none");
+            document.getElementById("second-next-btn").classList.add("d-none");
+            document.getElementById("second-prev-btn").classList.add("d-none");
+            document.getElementById("gerenal-info").style.transform = "translateX(110%)";
+            document.getElementById("gerenal-info").style.position = "absolute";
+            document.getElementById("profile-pic-div").style.position = "unset";
+            document.getElementById("profile-pic-div").style.transform = "translateX(0)";
+            document.getElementById("btn-tab-1").classList.add("active");
+            document.getElementById("btn-tab-2").classList.remove("active");
+            currentTab = 1;
+        });
 
-    document.getElementById("second-next-btn").addEventListener("click", e => {
-        document.getElementById("third-prev-btn").classList.remove("d-none");
-        document.getElementById("second-prev-btn").classList.add("d-none");
-        document.getElementById("gerenal-info").style.transform = "translateX(-110%)";
-        document.getElementById("gerenal-info").style.position = "absolute";
-        document.getElementById("add-friend").style.transform = "translateX(0)";
-        document.getElementById("add-friend").style.position = "unset";
-        document.getElementById("last-finish-btn").classList.remove("d-none");
-        document.getElementById("second-next-btn").classList.add("d-none");
-        document.getElementById("btn-tab-2").classList.remove("active");
-        document.getElementById("btn-tab-3").classList.add("active");
-        currentTab = 3;
+        document.getElementById("second-next-btn").addEventListener("click", e => {
+            document.getElementById("third-prev-btn").classList.remove("d-none");
+            document.getElementById("second-prev-btn").classList.add("d-none");
+            document.getElementById("gerenal-info").style.transform = "translateX(-110%)";
+            document.getElementById("gerenal-info").style.position = "absolute";
+            document.getElementById("add-friend").style.transform = "translateX(0)";
+            document.getElementById("add-friend").style.position = "unset";
+            document.getElementById("last-finish-btn").classList.remove("d-none");
+            document.getElementById("second-next-btn").classList.add("d-none");
+            document.getElementById("btn-tab-2").classList.remove("active");
+            document.getElementById("btn-tab-3").classList.add("active");
+            currentTab = 3;
 
-    });
+        });
 
-    document.getElementById("third-prev-btn").addEventListener("click", e => {
-        document.getElementById("last-finish-btn").classList.add("d-none");
-        document.getElementById("second-next-btn").classList.remove("d-none");
-        document.getElementById("third-prev-btn").classList.add("d-none");
-        document.getElementById("second-prev-btn").classList.remove("d-none");
-        document.getElementById("add-friend").style.transform = "translateX(110%)";
-        document.getElementById("add-friend").style.position = "absolute";
-        document.getElementById("gerenal-info").style.transform = "translateX(0)";
-        document.getElementById("gerenal-info").style.position = "unset";
-        document.getElementById("btn-tab-3").classList.remove("active");
-        document.getElementById("btn-tab-2").classList.add("active");
-        currentTab = 2;
-    });
+        document.getElementById("third-prev-btn").addEventListener("click", e => {
+            document.getElementById("last-finish-btn").classList.add("d-none");
+            document.getElementById("second-next-btn").classList.remove("d-none");
+            document.getElementById("third-prev-btn").classList.add("d-none");
+            document.getElementById("second-prev-btn").classList.remove("d-none");
+            document.getElementById("add-friend").style.transform = "translateX(110%)";
+            document.getElementById("add-friend").style.position = "absolute";
+            document.getElementById("gerenal-info").style.transform = "translateX(0)";
+            document.getElementById("gerenal-info").style.position = "unset";
+            document.getElementById("btn-tab-3").classList.remove("active");
+            document.getElementById("btn-tab-2").classList.add("active");
+            currentTab = 2;
+        });
 
-    document.getElementById("btn-tab-1").addEventListener("click", e => {
-        if (currentTab === 1) {
-            return;
-        }
-        if (currentTab === 2) {
-            document.getElementById("second-prev-btn").dispatchEvent(new Event('click'));
-        }
-        if (currentTab === 3) {
-            document.getElementById("third-prev-btn").dispatchEvent(new Event('click'));
-            setTimeout(() => {
+        document.getElementById("btn-tab-1").addEventListener("click", e => {
+            if (currentTab === 1) {
+                return;
+            }
+            if (currentTab === 2) {
                 document.getElementById("second-prev-btn").dispatchEvent(new Event('click'));
-            }, 500);
-        }
-    });
-    document.getElementById("btn-tab-2").addEventListener("click", e => {
-        if (currentTab === 1) {
-            document.getElementById("first-next-btn").dispatchEvent(new Event('click'));
-        }
-        if (currentTab === 2) {
-            return;
-        }
-        if (currentTab === 3) {
-            document.getElementById("third-prev-btn").dispatchEvent(new Event('click'));
-        }
-    });
-    document.getElementById("btn-tab-3").addEventListener("click", e => {
-        if (currentTab === 1) {
-            document.getElementById("first-next-btn").dispatchEvent(new Event('click'));
-            setTimeout(() => {
+            }
+            if (currentTab === 3) {
+                document.getElementById("third-prev-btn").dispatchEvent(new Event('click'));
+                setTimeout(() => {
+                    document.getElementById("second-prev-btn").dispatchEvent(new Event('click'));
+                }, 500);
+            }
+        });
+        document.getElementById("btn-tab-2").addEventListener("click", e => {
+            if (currentTab === 1) {
+                document.getElementById("first-next-btn").dispatchEvent(new Event('click'));
+            }
+            if (currentTab === 2) {
+                return;
+            }
+            if (currentTab === 3) {
+                document.getElementById("third-prev-btn").dispatchEvent(new Event('click'));
+            }
+        });
+        document.getElementById("btn-tab-3").addEventListener("click", e => {
+            if (currentTab === 1) {
+                document.getElementById("first-next-btn").dispatchEvent(new Event('click'));
+                setTimeout(() => {
+                    document.getElementById("second-next-btn").dispatchEvent(new Event('click'));
+                }, 500);
+            }
+            if (currentTab === 2) {
                 document.getElementById("second-next-btn").dispatchEvent(new Event('click'));
-            }, 500);
-        }
-        if (currentTab === 2) {
-            document.getElementById("second-next-btn").dispatchEvent(new Event('click'));
-        }
-        if (currentTab === 3) {
-            return;
-        }
-    });
+            }
+            if (currentTab === 3) {
+                return;
+            }
+        });
 
-</script>
+        function addToFriend(userId) {
+            $.ajax({
+                url: '{{route("add.to.friend")}}',
+                method: 'post',
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "user_id": userId
+                },
+                success: function (response) {
+                    if (response.status === true) {
+                        $('#friendship-status-' + userId).text("Request sent");
+                    } else {
+                        $('#friendship-status-' + userId).text("Request failed");
+                    }
+                }
+            });
+        }
+    </script>
 @endpush

@@ -652,7 +652,7 @@
     </style>
     <style>
         #signin {
-            background-image: url('/storage/images/site/bg.jpg');
+            background-image: url('/img/bg.jpg');
             background-repeat: no-repeat;
             min-height: 100vh;
             background-size: cover;

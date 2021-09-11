@@ -22,12 +22,19 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        if (!is_dir(public_path('storage/images/users/'))) {
+            mkdir(public_path('storage/images/users/'), 0755, true);
+        }
+        $genders = array("male", "female", "other");
         return [
-            'name' => $this->faker->name(),
-            'email' => $this->faker->unique()->safeEmail(),
+            'name'              => $this->faker->name(),
+            'username'          => $this->faker->userName(),
+            'image'             => $this->faker->image('public/storage/images/users', 640, 480, null, false),
+            'email'             => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'remember_token' => Str::random(10),
+            'password'          => bcrypt('12345678'), // password
+            'remember_token'    => Str::random(10),
+            'gender'            => $genders[array_rand($genders, 1)],
         ];
     }
 

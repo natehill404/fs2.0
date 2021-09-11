@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,7 +28,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->profile->startup_skip) {
+        if (optional(Auth::user()->profile)->startup_skip) {
             return view('home');
         }
         return redirect("/startup");
@@ -35,20 +36,36 @@ class HomeController extends Controller
 
     public function startup()
     {
-        if (Auth::user()->profile->startup_skip) {
+        if (optional(Auth::user()->profile)->startup_skip) {
             return redirect("/");
         }
-        return view('startup');
+        $users = User::where('id', '!=', Auth::user()->id)->limit(14)->latest()->get();
+        $getFriendRequests = Auth::user()->getFriendRequests();
+        $friendRequests = array();
+        foreach ($getFriendRequests as $key => $getFriendRequest) {
+            $senderUser = User::find($getFriendRequest->sender_id);
+            $friendRequests[$key]['id'] = $senderUser->id;
+            $friendRequests[$key]['name'] = $senderUser->name;
+            $friendRequests[$key]['image'] = $senderUser->image;
+            $friendRequests[$key]['gender'] = $senderUser->gender;
+            $friendRequests[$key]['mutual'] = Auth::user()->getMutualFriendsCount($senderUser);
+        }
+        return view('startup', compact('users', 'friendRequests'));
     }
 
-    public function profile(Request $request)
+    public function profile()
+    {
+        return view('profile');
+    }
+
+    public function editProfile(Request $request)
     {
         if ($request->isMethod('get')) {
-            return view('profile');
+            return view('edit-profile');
         } else if ($request->isMethod('put')) {
             $user = $request->user();
             $request->validate([
-                'name' => ['required', 'string', 'max:255'],
+                'name'     => ['required', 'string', 'max:255'],
                 'username' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($user->id)]
             ]);
             $user->name = $request->input('name');
@@ -69,13 +86,91 @@ class HomeController extends Controller
                     $imageFullPath = public_path() . "/storage/images/users/" . $fileName;
                     file_put_contents($imageFullPath, $image_base64);
 
-                    $user->image = "/storage/images/users/" . $fileName;
+                    $user->image = $fileName;
                 } catch (Exception $e) {
-                    return redirect('/profile')->with("error", "Image not able to upload");
+                    return redirect('/edit-profile')->with("error", "Image not able to upload");
                 }
             }
             $user->save();
-            return redirect('/profile')->with("message", "Profile update successfuly");
+            return redirect('/edit-profile')->with("message", "Profile update successfuly");
+        }
+    }
+
+    public function addToFriend(Request $request)
+    {
+        try {
+            $user = User::find(Auth::id());
+            $recipient = User::find($request->user_id);
+            if ($user->befriend($recipient)) {
+                return response()->json([
+                    'status'  => true,
+                    'data'    => '',
+                    'message' => 'Request sent.',
+                ]);
+            }
+            return response()->json([
+                'status'  => false,
+                'data'    => '',
+                'message' => 'Request failed',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status'  => false,
+                'data'    => '',
+                'message' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    public function acceptFriendRequest(Request $request)
+    {
+        try {
+            $user = User::find(Auth::id());
+            $sender = User::find($request->user_id);;
+            if ($user->acceptFriendRequest($sender)) {
+                return response()->json([
+                    'status'  => true,
+                    'data'    => '',
+                    'message' => 'Request accepted.',
+                ]);
+            }
+            return response()->json([
+                'status'  => false,
+                'data'    => '',
+                'message' => 'Request accepted failed',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status'  => false,
+                'data'    => '',
+                'message' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    public function denyFriendRequest(Request $request)
+    {
+        try {
+            $user = User::find(Auth::id());
+            $sender = User::find($request->user_id);;
+            if ($user->denyFriendRequest($sender)) {
+                return response()->json([
+                    'status'  => true,
+                    'data'    => '',
+                    'message' => 'Request denied.',
+                ]);
+            }
+            return response()->json([
+                'status'  => false,
+                'data'    => '',
+                'message' => 'Request denied failed',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status'  => false,
+                'data'    => '',
+                'message' => $e->getMessage(),
+            ]);
         }
     }
 }
