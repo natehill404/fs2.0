@@ -61,7 +61,7 @@
 
 @section('content')
     <div class="d-flex justify-content-center w-100">
-        @include('components.profile-create',['users' => $users])
+        @include('components.profile-create')
     </div>
 
     <div class="modal loading-modal-div" id="loading-modal">

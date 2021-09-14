@@ -581,29 +581,8 @@
             <div class="d-flex justify-content-center mt-3">
                 <strong style="font-size: 1.5rem;font-weight:600;color:rgb(237, 126, 42);">Add Friends</strong>
             </div>
-            <div class="friends d-flex flex-wrap mt-4" style="gap: 20px;">
-                @foreach($users as $user)
-                    <div class="firend card">
-                        <div class="card-body m-2 d-flex flex-column align-items-center">
-                            <img width="100" height="100" style="border-radius: 50%;"
-                                 src="{{asset('storage/images/users/'.$user->image)}}" alt="User Image">
-                            <strong class="friend-name m-2"
-                                    style="font-size: 1rem;font-weight:600;color:rgb(242, 137, 56);">{{$user->name}}</strong>
-                            <button onclick="addToFriend('{{$user->id}}')" type="button"
-                                    class="btn btn-sm btn-success js_friend-add" data-uid="12">
-                                @if(Auth::user()->hasSentFriendRequestTo($user))
-                                    Requested
-                                @else
-                                    <i class="fa fa-user-plus mr-2"></i>
-                                    <span id="friendship-status-{{$user->id}}">
-                                    Add Friend
-                                    @endif
-                                </span>
-                            </button>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
+
+            @livewire('add-friend')
         </div>
 
     </div>
@@ -818,22 +797,5 @@
             }
         });
 
-        function addToFriend(userId) {
-            $.ajax({
-                url: '{{route("add.to.friend")}}',
-                method: 'post',
-                data: {
-                    "_token": "{{ csrf_token() }}",
-                    "user_id": userId
-                },
-                success: function (response) {
-                    if (response.status === true) {
-                        $('#friendship-status-' + userId).text("Request sent");
-                    } else {
-                        $('#friendship-status-' + userId).text("Request failed");
-                    }
-                }
-            });
-        }
     </script>
 @endpush

@@ -29,7 +29,8 @@ class HomeController extends Controller
     public function index()
     {
         if (optional(Auth::user()->profile)->startup_skip) {
-            return view('home');
+            $friends = Auth::user()->getFriends($perPage = 5);
+            return view('home', compact('friends'));
         }
         return redirect("/startup");
     }
@@ -39,23 +40,33 @@ class HomeController extends Controller
         if (optional(Auth::user()->profile)->startup_skip) {
             return redirect("/");
         }
-        $users = User::where('id', '!=', Auth::user()->id)->limit(14)->latest()->get();
-        $getFriendRequests = Auth::user()->getFriendRequests();
-        $friendRequests = array();
-        foreach ($getFriendRequests as $key => $getFriendRequest) {
-            $senderUser = User::find($getFriendRequest->sender_id);
-            $friendRequests[$key]['id'] = $senderUser->id;
-            $friendRequests[$key]['name'] = $senderUser->name;
-            $friendRequests[$key]['image'] = $senderUser->image;
-            $friendRequests[$key]['gender'] = $senderUser->gender;
-            $friendRequests[$key]['mutual'] = Auth::user()->getMutualFriendsCount($senderUser);
-        }
-        return view('startup', compact('users', 'friendRequests'));
+
+        return view('startup');
     }
 
     public function profile()
     {
         return view('profile');
+    }
+
+    public function profileDetails($userName)
+    {
+        $user = User::where('username', $userName)->first();
+        if (!$user) {
+            return redirect()->back()->with('error', 'User not found!');
+        }
+        return view('profile-details', compact('user'));
+    }
+
+    public function timelineDetails($userName)
+    {
+        $user = User::where('username', $userName)->first();
+        if (!$user) {
+
+            return redirect()->back()->with('error', 'User not found!');
+        }
+        $friends = $user->getFriends($perPage = 5);
+        return view('profile-timeline', compact('user', 'friends'));
     }
 
     public function editProfile(Request $request)
@@ -96,81 +107,38 @@ class HomeController extends Controller
         }
     }
 
-    public function addToFriend(Request $request)
+
+    public function addFriend($userName)
     {
         try {
-            $user = User::find(Auth::id());
-            $recipient = User::find($request->user_id);
-            if ($user->befriend($recipient)) {
-                return response()->json([
-                    'status'  => true,
-                    'data'    => '',
-                    'message' => 'Request sent.',
-                ]);
+            $user = Auth::user();
+            $friend = User::where('username', $userName)->first();
+            if (!$friend) {
+                return redirect()->back()->with('error', 'User not found!');
             }
-            return response()->json([
-                'status'  => false,
-                'data'    => '',
-                'message' => 'Request failed',
-            ]);
+            if ($user->befriend($friend)) {
+                return redirect()->back()->with('success', 'Request has been sent!');
+            }
+            return redirect()->back()->with('error', 'Add friend failed!');
         } catch (\Exception $e) {
-            return response()->json([
-                'status'  => false,
-                'data'    => '',
-                'message' => $e->getMessage(),
-            ]);
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
 
-    public function acceptFriendRequest(Request $request)
+    public function removeFriend($userName)
     {
         try {
-            $user = User::find(Auth::id());
-            $sender = User::find($request->user_id);;
-            if ($user->acceptFriendRequest($sender)) {
-                return response()->json([
-                    'status'  => true,
-                    'data'    => '',
-                    'message' => 'Request accepted.',
-                ]);
+            $user = Auth::user();
+            $friend = User::where('username', $userName)->first();
+            if (!$friend) {
+                return redirect()->back()->with('error', 'User not found!');
             }
-            return response()->json([
-                'status'  => false,
-                'data'    => '',
-                'message' => 'Request accepted failed',
-            ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'status'  => false,
-                'data'    => '',
-                'message' => $e->getMessage(),
-            ]);
-        }
-    }
-
-    public function denyFriendRequest(Request $request)
-    {
-        try {
-            $user = User::find(Auth::id());
-            $sender = User::find($request->user_id);;
-            if ($user->denyFriendRequest($sender)) {
-                return response()->json([
-                    'status'  => true,
-                    'data'    => '',
-                    'message' => 'Request denied.',
-                ]);
+            if ($user->unfriend($friend)) {
+                return redirect()->back()->with('success', 'Friend removed!');
             }
-            return response()->json([
-                'status'  => false,
-                'data'    => '',
-                'message' => 'Request denied failed',
-            ]);
+            return redirect()->back()->with('error', 'Friend remove failed!');
         } catch (\Exception $e) {
-            return response()->json([
-                'status'  => false,
-                'data'    => '',
-                'message' => $e->getMessage(),
-            ]);
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
 }

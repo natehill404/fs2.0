@@ -12,7 +12,10 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
-        "multicaret/laravel-acquaintances": "^3.5"
+        "livewire/livewire": "^2.5",
+        "multicaret/laravel-acquaintances": "^3.5",
+        "munafio/chatify": "^1.2",
+        "pusher/pusher-php-server": "^7.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",

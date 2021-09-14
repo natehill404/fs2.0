@@ -21,6 +21,8 @@
     <link rel="mask-icon" href="{{asset('favicon/safari-pinned-tab.svg')}}" color="#5bbad5">
 
     <!-- Styles -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css"
+          rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/fontawesome.css') }}" rel="stylesheet">
     <!-- styles -->
@@ -31,6 +33,8 @@
     <link rel="stylesheet" href="{{ asset('css/vendor/simplebar.css') }}">
     <!-- tiny-slider styles -->
     <link rel="stylesheet" href="{{ asset('css/vendor/tiny-slider.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
+    @livewireStyles
     @stack('styles')
 </head>
 <body>
@@ -788,7 +792,7 @@
     </nav>
     <!-- /NAVIGATION WIDGET -->
 
-    <!-- chatboxes -->
+    {{--<!-- chatboxes -->
     <div class="row">
         <div class="chatbox chatbox22 ch0 d-none">
             <div class="chatbox__title justify-content-between ">
@@ -2271,7 +2275,7 @@
             <!-- /INTERACTIVE INPUT -->
         </form>
         <!-- /CHAT WIDGET FORM -->
-    </aside>
+    </aside>--}}
 
     <header class="header">
         <a class="navbar-brand p-0" href="{{route('home')}}">
@@ -2451,61 +2455,7 @@
                                 <div class="simplebar-mask">
                                     <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
                                         <div class="simplebar-content-wrapper" style="height: 100%; overflow: hidden;">
-                                            <div class="simplebar-content" style="padding: 0px;">
-                                                @if(count($friendRequests) > 0)
-                                                    @foreach($friendRequests as $friendRequest)
-                                                        <div class="dropdown-box-list-item">
-                                                            <div class="user-status request">
-                                                                <a class="user-status-avatar" href="#">
-                                                                    <div class="user-avatar small no-outline">
-                                                                        <div class="user-avatar-content">
-                                                                            <img
-                                                                                @if(file_exists(asset('storage/images/users/'.$friendRequest['image'])))
-                                                                                src="{{asset('storage/images/users/'.$friendRequest['image'])}}"
-                                                                                @elseif($friendRequest['gender'] === "male")
-                                                                                src="{{asset('img/profile/male.png')}}"
-                                                                                @elseif($friendRequest['gender'] === "female")
-                                                                                src="{{asset('img/profile/female.jpg')}}"
-                                                                                @endif
-                                                                                style="width: 30px; height: 32px; position: relative;">
-                                                                            <canvas width="30" height="32"
-                                                                                    style="position: absolute; top: 0px; left: 0px;"></canvas>
-                                                                        </div>
-                                                                    </div>
-                                                                </a>
-                                                                <p class="user-status-title">
-                                                                    <a class="bold"
-                                                                       href="#">{{$friendRequest['name']}}</a></p>
-                                                                <p class="user-status-text">
-                                                                    {{$friendRequest['mutual']}} friends in common</p>
-                                                                <div class="action-request-list"
-                                                                     id="request-action-{{$friendRequest['id']}}">
-                                                                    <div class="action-request accept"
-                                                                         onclick="acceptOrDeclineRequest('accept','{{$friendRequest['id']}}')">
-                                                                        <svg
-                                                                            class="action-request-icon icon-add-friend">
-                                                                            <use xlink:href="#svg-add-friend"></use>
-                                                                        </svg>
-                                                                    </div>
-
-                                                                    <div class="action-request decline"
-                                                                         onclick="acceptOrDeclineRequest('deny','{{$friendRequest['id']}}')">
-                                                                        <svg
-                                                                            class="action-request-icon icon-remove-friend">
-                                                                            <use xlink:href="#svg-remove-friend"></use>
-                                                                        </svg>
-                                                                    </div>
-                                                                </div>
-                                                                <p class="mt-3"
-                                                                   id="request-action-response-{{$friendRequest['id']}}"></p>
-                                                            </div>
-                                                        </div>
-                                                    @endforeach
-                                                @else
-                                                    <p class="dropdown-box-list-item">Not any pending requests.</p>
-                                                @endif
-
-                                            </div>
+                                            @livewire('friend-requests')
                                         </div>
                                     </div>
                                 </div>
@@ -2872,6 +2822,7 @@
     <script src="{{ asset('js/widget/twitter.js') }}"></script>
     <!-- SVG icons -->
     <script src="{{ asset('js/utils/svg-loader.js') }}"></script>
+    <script src="{{ asset('js/toastr/toastr.min.js') }}"></script>
     <!-- bootstrap -->
     {{--<script src="vendors/bootstrap/js/bootstrap.min.js"></script>
     <script src="vendors/jquery/jquery.min.js"></script>--}}
@@ -3061,46 +3012,29 @@
         mq2(x2); // Call listener function at run time
         x2.addListener(mq2) // Attach listener function on state changes
 
-        function acceptOrDeclineRequest(type, userId) {
-            let url = "";
-            if (type === "accept") {
-                url = '{{route('accept.friend.request')}}';
-            }
-            if (type === "deny") {
-                url = '{{route('deny.friend.request')}}';
-            }
 
-            if (url) {
-                $.ajax({
-                    url: url,
-                    method: 'post',
-                    data: {
-                        "_token": "{{ csrf_token() }}",
-                        "user_id": userId
-                    },
-                    success: function (response) {
-                        if (response.status === true) {
-                            if (type === "accept") {
-                                $('#request-action-response-' + userId).text("Request accepted");
-                            }
-                            if (type === "deny") {
-                                $('#request-action-response-' + userId).text("Request declined");
-                            }
-                            $('#request-action-' + userId).css('display', 'none !important');
-                        }
-                        if (response.status === false) {
-                            if (type === "accept") {
-                                $('#request-action-response-' + userId).text("Accept request failed!");
-                            }
-                            if (type === "deny") {
-                                $('#request-action-response-' + userId).text("Declined request failed!");
-                            }
-                        }
-                    }
-                });
-            }
-        }
+        toastr.options =
+            {
+                "closeButton": false,
+                "progressBar": true,
+                "positionClass": 'toast-bottom-right'
+            };
+        window.addEventListener('alert', event => {
+            toastr[event.detail.type](event.detail.message);
+        });
     </script>
+    @if(session()->has('error'))
+        <script>
+            toastr.error("{{ session()->get('error') }}");
+        </script>
+    @endif
+
+    @if(session()->has('success'))
+        <script>
+            toastr.success("{{ session()->get('success') }}");
+        </script>
+    @endif
+    @livewireScripts
     @stack('scripts')
 </div>
 </body>

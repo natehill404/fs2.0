@@ -108,11 +108,11 @@
 
                         <!-- USER AVATAR CONTENT -->
                         <div class="user-avatar-content">
-                            @if(Auth::user()->image)
-                                <img src="{{asset('storage/images/users/'.Auth::user()->image)}}" alt="profile"/>
-                            @elseif(Auth::user()->gender === "male")
+                            @if($user->image)
+                                <img src="{{asset('storage/images/users/'.$user->image)}}" alt="profile"/>
+                            @elseif($user->gender === "male")
                                 <img src="{{asset('img/profile/male.png')}}" alt="profile"/>
-                            @elseif(Auth::user()->gender === "female")
+                            @elseif($user->gender === "female")
                                 <img src="{{asset('img/profile/female.png')}}" alt="profile"/>
                             @else
                                 <img src="{{asset('img/profile/default.png')}}" alt="profile"/>
@@ -138,12 +138,12 @@
                         <!-- USER AVATAR CONTENT -->
                         <div class="user-avatar-content">
                             <!-- HEXAGON -->
-                            @if(Auth::user()->image)
+                            @if($user->image)
                                 <div class="hexagon-image-82-90"
-                                     data-src="{{asset('storage/images/users/'.Auth::user()->image)}}"></div>
-                            @elseif(Auth::user()->gender === "male")
+                                     data-src="{{asset('storage/images/users/'.$user->image)}}"></div>
+                            @elseif($user->gender === "male")
                                 <div class="hexagon-image-82-90" data-src="{{asset('img/profile/male.png')}}"></div>
-                            @elseif(Auth::user()->gender === "female")
+                            @elseif($user->gender === "female")
                                 <div class="hexagon-image-82-90" data-src="{{asset('img/profile/female.png')}}"></div>
                             @else
                                 <div class="hexagon-image-82-90" data-src="{{asset('img/profile/default.png')}}"></div>
@@ -196,7 +196,7 @@
                     <!-- /USER SHORT DESCRIPTION AVATAR -->
 
                     <!-- USER SHORT DESCRIPTION TITLE -->
-                    <p class="user-short-description-title"><a href="#">{{Auth::user()->name}}</a></p>
+                    <p class="user-short-description-title"><a href="#">{{$user->name}}</a></p>
                     <!-- /USER SHORT DESCRIPTION TITLE -->
 
                     <!-- USER SHORT DESCRIPTION TEXT -->
@@ -205,19 +205,32 @@
                 </div>
                 <!-- /USER SHORT DESCRIPTION -->
 
-                <!-- PROFILE HEADER INFO ACTIONS -->
-            {{--<div class="profile-header-info-actions">
-                <!-- PROFILE HEADER INFO ACTION -->
-                <p class="profile-header-info-action button secondary"><span class="hide-text-mobile">Add</span>
-                    Friend +</p>
-                <!-- /PROFILE HEADER INFO ACTION -->
+                <div class="profile-header-info-actions">
+                    @if($user->isFriendWith(auth()->user()))
+                        <a href="{{route('remove.friend',$user->username)}}">
+                            <p class="profile-header-info-action button secondary">
+                                <span class="hide-text-mobile">Remove </span>Friend +
+                            </p>
+                        </a>
+                        <a href="{{route('chat')}}">
+                            <p class="profile-header-info-action button primary ml-1"><span class="hide-text-mobile">Send</span>
+                                Message</p>
+                        </a>
+                    @else
+                        @if(auth()->user()->hasSentFriendRequestTo($user))
+                            <p class="profile-header-info-action button secondary">
+                                <span class="hide-text-mobile">Requested</span>
+                            </p>
+                        @else
+                            <a href="{{route('add.friend',$user->username)}}">
+                                <p class="profile-header-info-action button secondary">
+                                    <span class="hide-text-mobile">Add </span>Friend +
+                                </p>
+                            </a>
+                        @endif
+                    @endif
 
-                <!-- PROFILE HEADER INFO ACTION -->
-                <p class="profile-header-info-action button primary"><span class="hide-text-mobile">Send</span>
-                    Message</p>
-                <!-- /PROFILE HEADER INFO ACTION -->
-            </div>--}}
-            <!-- /PROFILE HEADER INFO ACTIONS -->
+                </div>
             </div>
             <!-- /PROFILE HEADER INFO -->
         </div>
@@ -228,7 +241,7 @@
             <!-- SECTION MENU -->
             <div id="section-navigation-slider" class="section-menu">
                 <!-- SECTION MENU ITEM -->
-                <a class="section-menu-item" href="{{route('profile')}}">
+                <a class="section-menu-item" href="{{route('profile.details',$user->username)}}">
                     <!-- SECTION MENU ITEM ICON -->
                     <svg class="section-menu-item-icon icon-profile">
                         <use xlink:href="#svg-profile"></use>
@@ -242,7 +255,7 @@
                 <!-- /SECTION MENU ITEM -->
 
                 <!-- SECTION MENU ITEM -->
-                <a class="section-menu-item active" href="{{route('home')}}">
+                <a class="section-menu-item active" href="{{route('profile.timeline',$user->username)}}">
                     <!-- SECTION MENU ITEM ICON -->
                     <svg class="section-menu-item-icon icon-timeline">
                         <use xlink:href="#svg-timeline"></use>
@@ -448,7 +461,7 @@
                     <!-- WIDGET BOX CONTENT -->
                     <div class="widget-box-content">
                         <!-- PARAGRAPH -->
-                        <p class="paragraph">Hi! My name is {{Auth::user()->name}} but some people may know me as
+                        <p class="paragraph">Hi! My name is {{$user->name}} but some people may know me as
                             GameHuntress! I have a
                             Twitch channel where I stream, play and review all the newest games.</p>
                         <!-- /PARAGRAPH -->
@@ -670,8 +683,7 @@
                     <!-- /WIDGET BOX SETTINGS -->
 
                     <!-- WIDGET BOX TITLE -->
-                    <p class="widget-box-title">Friends <span
-                            class="highlighted">{{auth()->user()->getFriendsCount()}}</span></p>
+                    <p class="widget-box-title">Friends <span class="highlighted">{{$user->getFriendsCount()}}</span></p>
                     <!-- /WIDGET BOX TITLE -->
 
                     <!-- WIDGET BOX CONTENT -->
@@ -716,20 +728,20 @@
                                     <!-- /USER STATUS TEXT -->
 
                                     <!-- ACTION REQUEST LIST -->
-                                    <div class="action-request-list">
+                                    {{--<div class="action-request-list">
                                         <!-- ACTION REQUEST -->
                                         <div class="action-request accept">
                                             <!-- ACTION REQUEST ICON -->
                                             <a href="{{route('remove.friend',$friend->username)}}">
-                                            <svg
-                                                class="action-request-icon icon-remove-friend">
-                                                <use xlink:href="#svg-remove-friend"></use>
-                                            </svg>
+                                                <svg
+                                                    class="action-request-icon icon-remove-friend">
+                                                    <use xlink:href="#svg-remove-friend"></use>
+                                                </svg>
                                             </a>
                                             <!-- /ACTION REQUEST ICON -->
                                         </div>
                                         <!-- /ACTION REQUEST -->
-                                    </div>
+                                    </div>--}}
                                     <!-- ACTION REQUEST LIST -->
                                 </div>
                             @endforeach
@@ -1113,7 +1125,7 @@
                                         <div class="user-avatar-content">
                                             <!-- HEXAGON -->
                                             <img
-                                                src="{{asset('storage/images/users/'.Auth::user()->image)}}">
+                                                src="{{asset('storage/images/users/'.$user->image)}}">
                                             <!-- /HEXAGON -->
                                         </div>
                                         <!-- /USER AVATAR CONTENT -->
@@ -1126,7 +1138,7 @@
 
                                 <!-- USER STATUS TITLE -->
                                 <p class="user-status-title medium"><a class="bold"
-                                                                       href="#">{{Auth::user()->name}}</a></p>
+                                                                       href="#">{{$user->name}}</a></p>
                                 <!-- /USER STATUS TITLE -->
 
                                 <!-- USER STATUS TEXT -->
@@ -1610,7 +1622,7 @@
                                         <!-- USER AVATAR CONTENT -->
                                         <div class="user-avatar-content">
                                             <!-- HEXAGON -->
-                                            <img src="{{asset('storage/images/users/'.Auth::user()->image)}}">
+                                            <img src="{{asset('storage/images/users/'.$user->image)}}">
                                             <!-- /HEXAGON -->
                                         </div>
                                         <!-- /USER AVATAR CONTENT -->
@@ -1623,7 +1635,7 @@
 
                                 <!-- USER STATUS TITLE -->
                                 <p class="user-status-title medium"><a class="bold"
-                                                                       href="#">{{Auth::user()->name}}</a></p>
+                                                                       href="#">{{$user->name}}</a></p>
                                 <!-- /USER STATUS TITLE -->
 
                                 <!-- USER STATUS TEXT -->
@@ -2011,7 +2023,7 @@
                                         <!-- USER AVATAR CONTENT -->
                                         <div class="user-avatar-content">
                                             <!-- HEXAGON -->
-                                            <img src="{{asset('storage/images/users/'.auth()->user()->image)}}">
+                                            <img src="{{asset('storage/images/users/'.$user->image)}}">
                                             <!-- /HEXAGON -->
                                         </div>
                                         <!-- /USER AVATAR CONTENT -->
@@ -2023,8 +2035,7 @@
                                 <!-- /USER STATUS AVATAR -->
 
                                 <!-- USER STATUS TITLE -->
-                                <p class="user-status-title medium"><a class="bold"
-                                                                       href="#">{{auth()->user()->name}}</a>
+                                <p class="user-status-title medium"><a class="bold" href="#">{{$user->name}}</a>
                                 </p>
                                 <!-- /USER STATUS TITLE -->
 
@@ -3219,7 +3230,7 @@
                                 <!-- USER AVATAR CONTENT -->
                                 <div class="user-avatar-content">
                                     <!-- HEXAGON -->
-                                    <img src="{{asset('storage/images/users/'.auth()->user()->image)}}">
+                                    <img src="{{asset('storage/images/users/'.$user->image)}}">
                                     <!-- /HEXAGON -->
                                 </div>
                                 <!-- /USER AVATAR CONTENT -->
@@ -3310,7 +3321,7 @@
                                         <!-- USER AVATAR CONTENT -->
                                         <div class="user-avatar-content">
                                             <!-- HEXAGON -->
-                                            <img src="{{asset('storage/images/users/'.auth()->user()->image)}}">
+                                            <img src="{{asset('storage/images/users/'.$user->image)}}">
                                             <!-- /HEXAGON -->
                                         </div>
                                         <!-- /USER AVATAR CONTENT -->
@@ -3799,7 +3810,7 @@
                                         <!-- USER AVATAR CONTENT -->
                                         <div class="user-avatar-content">
                                             <!-- HEXAGON -->
-                                            <img src="{{asset('storage/images/users/'.auth()->user()->image)}}">
+                                            <img src="{{asset('storage/images/users/'.$user->image)}}">
                                             <!-- /HEXAGON -->
                                         </div>
                                         <!-- /USER AVATAR CONTENT -->
@@ -4386,7 +4397,7 @@
                             <div class="picture-item">
                                 <!-- PICTURE -->
                                 <figure class="picture round liquid">
-                                    <img src="{{asset('storage/images/users/'.auth()->user()->image)}}" alt="avatar-01">
+                                    <img src="{{asset('storage/images/users/'.$user->image)}}" alt="avatar-01">
                                 </figure>
                                 <!-- /PICTURE -->
                             </div>
@@ -4997,7 +5008,7 @@
                                     <div class="user-avatar-content">
                                         <!-- HEXAGON -->
                                         <div class="hexagon-image-30-32"
-                                             data-src="{{asset('storage/images/users/'.auth()->user()->image)}}"></div>
+                                             data-src="{{asset('storage/images/users/'.$user->image)}}"></div>
                                         <!-- /HEXAGON -->
                                     </div>
                                     <!-- /USER AVATAR CONTENT -->
@@ -6259,7 +6270,7 @@
                     <div class="user-avatar-content">
                         <!-- HEXAGON -->
                         <div class="hexagon-image-30-32"
-                             data-src="{{asset('storage/images/users/'.auth()->user()->image)}}"></div>
+                             data-src="{{asset('storage/images/users/'.$user->image)}}"></div>
                         <!-- /HEXAGON -->
                     </div>
                     <!-- /USER AVATAR CONTENT -->
