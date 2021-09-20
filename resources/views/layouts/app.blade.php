@@ -39,7 +39,6 @@
 </head>
 <body>
 <div id="app">
-
     <!-- NAVIGATION WIDGET -->
     <nav id="navigation-widget-small" class="navigation-widget navigation-widget-desktop closed sidebar left delayed">
         <div class="leftmenu">
@@ -171,7 +170,7 @@
     <nav id="navigation-widget" class="navigation-widget navigation-widget-desktop sidebar left hidden" data-simplebar>
         <!-- NAVIGATION WIDGET COVER -->
         <figure class="navigation-widget-cover liquid">
-            <img src="{{asset('storage/images/users/'.Auth::user()->image)}}" alt="cover-01">
+            <img src="{{Auth::user()->avatar_image}}" alt="cover-01">
         </figure>
         <!-- /NAVIGATION WIDGET COVER -->
 
@@ -191,7 +190,7 @@
                 <div class="user-avatar-content">
                     <!-- HEXAGON -->
                     <div class="hexagon-image-82-90"
-                         data-src="{{asset('storage/images/users/'.Auth::user()->image)}}"></div>
+                         data-src="{{Auth::user()->avatar_image}}"></div>
                     <!-- /HEXAGON -->
                 </div>
                 <!-- /USER AVATAR CONTENT -->
@@ -464,7 +463,7 @@
                     <div class="user-avatar-content">
                         <!-- HEXAGON -->
                         <div class="hexagon-image-30-32"
-                             data-src="{{asset('storage/images/users/'.Auth::user()->image)}}"></div>
+                             data-src="{{Auth::user()->avatar_image}}"></div>
                         <!-- /HEXAGON -->
                     </div>
                     <!-- /USER AVATAR CONTENT -->
@@ -792,625 +791,395 @@
     </nav>
     <!-- /NAVIGATION WIDGET -->
 
-    {{--<!-- chatboxes -->
-    <div class="row">
-        <div class="chatbox chatbox22 ch0 d-none">
-            <div class="chatbox__title justify-content-between ">
-                <div>
-
-                    <h5>
-                        <div class="chat-img"><img src="{{asset('storage/images/users/'.Auth::user()->image)}}"
-                                                   alt="profile"/></div>
-                        <a href="javascript:void(0);">{{Auth::user()->name}}</a>
-                    </h5>
-
-                </div>
-                <!--<button class="chatbox__title__tray">
-                  <span></span>
-                </button>-->
-                <div class="d-flex justify-content-center align-items-center">
-           <span class="mr-3">
-           <i class="fa fa-video-camera text-white"></i>
-         </span>
-                    <span class="mr-2">
-           <i class="fa fa-phone text-white"></i>
-         </span>
-                    <span class="ct0">
-           -
-         </span>
-
-                    <button class="chatbox__title__close ctl0">
-           <span>
-             <svg viewBox="0 0 12 12" width="12px" height="12px">
-               <line stroke="#FFFFFF" x1="11.75" y1="0.25" x2="0.25" y2="11.75"></line>
-               <line stroke="#FFFFFF" x1="11.75" y1="11.75" x2="0.25" y2="0.25"></line>
-             </svg>
-           </span>
-                    </button>
-                </div>
-
-
-            </div>
-            <div class="chatbox__body">
-                <ul class="text-center">
-
-                    <li><a href="#"> 21/03/2021</a></li>
-                </ul>
-                <div class="chatbox__body__message chatbox__body__message--left">
-
-                    <div class="chatbox_timing">
-                        <ul>
-
-                            <li><a href="#"> 7:00 PM</a></li>
-                        </ul>
-                    </div>
-                    <img src="{{asset('storage/images/users/'.Auth::user()->image)}}" alt="Picture">
-                    <div class="clearfix"></div>
-                    <div class="ul_section_full">
-                        <ul class="ul_msg">
-                            <!-- <li><strong>Person Name</strong></li> -->
-                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                        </ul>
-                        <i class="fa fa-share cursor-pointer mr-2 ml-2"></i>
-                        <i class="fa fa-ellipsis-h cursor-pointer"></i>
-                        <div class="clearfix"></div>
-                        <ul class="ul_msg2">
-                            <li><a href="#"><i class="fa fa-pencil"></i> </a></li>
-                            <li><a href="#"><i class="fa fa-trash chat-trash"></i></a></li>
-                        </ul>
-                    </div>
-
-                </div>
-                <div class="chatbox__body__message chatbox__body__message--right">
-
-                    <div class="chatbox_timing">
-                        <ul>
-
-                            <li><a href="#"> 7:00 PM</a></li>
-                        </ul>
-                    </div>
-
-                    <img src="{{asset('storage/images/users/'.Auth::user()->image)}}" alt="Picture">
-                    <div class="clearfix"></div>
-                    <div class="ul_section_full">
-                        <ul class="ul_msg">
-                            <!-- <li><strong>Person Name</strong></li> -->
-                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-
-                        </ul>
-                        <i class="fa fa-share cursor-pointer mr-2 ml-2"></i>
-                        <i class="fa fa-ellipsis-h cursor-pointer"></i>
-                        <div class="clearfix"></div>
-                        <ul class="ul_msg2">
-                            <li><a href="#"><i class="fa fa-pencil"></i> </a></li>
-                            <li><a href="#"><i class="fa fa-trash chat-trash"></i></a></li>
-                        </ul>
-                    </div>
-
-                </div>
-                <div class="chatbox__body__message chatbox__body__message--left">
-
-                    <div class="chatbox_timing">
-                        <ul>
-
-                            <li><a href="#"> 7:00 PM</a></li>
-                        </ul>
-                    </div>
-
-                    <img src="{{asset('storage/images/users/'.Auth::user()->image)}}" alt="Picture">
-                    <div class="clearfix"></div>
-                    <div class="ul_section_full">
-                        <ul class="ul_msg">
-                            <!-- <li><strong>Person Name</strong></li> -->
-                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                        </ul>
-
-                        <i class="fa fa-share cursor-pointer mr-2 ml-2"></i>
-                        <i class="fa fa-ellipsis-h cursor-pointer"></i>
-                        <div class="clearfix"></div>
-                        <ul class="ul_msg2">
-                            <li><a href="#"><i class="fa fa-pencil"></i> </a></li>
-                            <li><a href="#"><i class="fa fa-trash chat-trash"></i></a></li>
-                        </ul>
-                    </div>
-
-                </div>
-                <div class="chatbox__body__message chatbox__body__message--right">
-
-                    <div class="chatbox_timing">
-                        <ul>
-
-                            <li><a href="#"> 7:00 PM</a></li>
-                        </ul>
-                    </div>
-
-                    <img src="{{asset('storage/images/users/'.Auth::user()->image)}}" alt="Picture">
-                    <div class="clearfix"></div>
-                    <div class="ul_section_full">
-                        <ul class="ul_msg">
-                            <!-- <li><strong>Person Name</strong></li> -->
-                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                        </ul>
-
-                        <i class="fa fa-share cursor-pointer mr-2 ml-2"></i>
-                        <i class="fa fa-ellipsis-h cursor-pointer"></i>
-                        <div class="clearfix"></div>
-                        <ul class="ul_msg2">
-                            <li><a href="#"><i class="fa fa-pencil"></i> </a></li>
-                            <li><a href="#"><i class="fa fa-trash chat-trash"></i></a></li>
-                        </ul>
-                    </div>
-
-                </div>
-                <div class="chatbox__body__message chatbox__body__message--left">
-
-                    <div class="chatbox_timing">
-                        <ul>
-
-                            <li><a href="#"> 7:00 PM</a></li>
-                        </ul>
-                    </div>
-
-                    <img src="{{asset('storage/images/users/'.Auth::user()->image)}}" alt="Picture">
-                    <div class="clearfix"></div>
-                    <div class="ul_section_full">
-                        <ul class="ul_msg">
-                            <!-- <li><strong>Person Name</strong></li> -->
-                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                        </ul>
-
-                        <i class="fa fa-share cursor-pointer mr-2 ml-2"></i>
-                        <i class="fa fa-ellipsis-h cursor-pointer"></i>
-                        <div class="clearfix"></div>
-                        <ul class="ul_msg2">
-                            <li><a href="#"><i class="fa fa-pencil"></i> </a></li>
-                            <li><a href="#"><i class="fa fa-trash chat-trash"></i></a></li>
-                        </ul>
-                    </div>
-
-                </div>
-            </div>
-            <div class="panel-footer">
-                <div class="input-group align-items-center">
-                    <div class="file-upload">
-                        <label for="file-input">
-                            <i class="fa fa-paperclip"></i>
-                        </label>
-
-                        <input id="file-input" accept="audio/*" type="file"/>
-                    </div>
-                    <input id="btn-input" type="text" class="form-control input-sm chat_set_height"
-                           placeholder="Type your message here..." tabindex="0" dir="ltr" spellcheck="false"
-                           autocomplete="off" autocorrect="off" autocapitalize="off" contenteditable="true"/>
-
-                    <span class="input-group-btn d-flex align-items-center">
-           <!-- <button class="btn bt_bg btn-sm" id="btn-chat">
-             Send</button> -->
-             <i class="fa fa-smile-o mr-2"> </i>
-             <div class="audio-upload">
-               <label for="audio-input">
-                 <i class="fa fa-microphone"></i>
-               </label>
-
-               <input id="audio-input" accept="audio/*" type="file"/>
-             </div>
-         </span>
-                </div>
-            </div>
-        </div>
-        <div class="chatbox chatbox22 ch1 d-none">
-            <div class="chatbox__title justify-content-between ">
-                <div>
-
-                    <h5>
-                        <div class="chat-img"><img src="{{asset('storage/images/users/'.Auth::user()->image)}}"
-                                                   alt="profile"/></div>
-                        <a href="javascript:void(0);">{{Auth::user()->name}}</a>
-                    </h5>
-
-                </div>
-                <!--<button class="chatbox__title__tray">
-                  <span></span>
-                </button>-->
-                <div class="d-flex justify-content-center align-items-center">
-         <span class="mr-3">
-         <i class="fa fa-video-camera text-white"></i>
-       </span>
-                    <span class="mr-2">
-         <i class="fa fa-phone text-white"></i>
-       </span>
-                    <span class="ct0">
-         -
-       </span>
-
-                    <button class="chatbox__title__close ctl1">
-         <span>
-           <svg viewBox="0 0 12 12" width="12px" height="12px">
-             <line stroke="#FFFFFF" x1="11.75" y1="0.25" x2="0.25" y2="11.75"></line>
-             <line stroke="#FFFFFF" x1="11.75" y1="11.75" x2="0.25" y2="0.25"></line>
-           </svg>
-         </span>
-                    </button>
-                </div>
-
-
-            </div>
-            <div class="chatbox__body">
-                <ul class="text-center">
-
-                    <li><a href="#"> 21/03/2021</a></li>
-                </ul>
-                <div class="chatbox__body__message chatbox__body__message--left">
-
-                    <div class="chatbox_timing">
-                        <ul>
-
-                            <li><a href="#"> 7:00 PM</a></li>
-                        </ul>
-                    </div>
-                    <img src="{{asset('storage/images/users/'.Auth::user()->image)}}" alt="Picture">
-                    <div class="clearfix"></div>
-                    <div class="ul_section_full">
-                        <ul class="ul_msg">
-                            <!-- <li><strong>Person Name</strong></li> -->
-                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                        </ul>
-                        <i class="fa fa-share cursor-pointer mr-2 ml-2"></i>
-                        <i class="fa fa-ellipsis-h cursor-pointer"></i>
-                        <div class="clearfix"></div>
-                        <ul class="ul_msg2">
-                            <li><a href="#"><i class="fa fa-pencil"></i> </a></li>
-                            <li><a href="#"><i class="fa fa-trash chat-trash"></i></a></li>
-                        </ul>
-                    </div>
-
-                </div>
-                <div class="chatbox__body__message chatbox__body__message--right">
-
-                    <div class="chatbox_timing">
-                        <ul>
-
-                            <li><a href="#"> 7:00 PM</a></li>
-                        </ul>
-                    </div>
-
-                    <img src="{{asset('storage/images/users/'.Auth::user()->image)}}" alt="Picture">
-                    <div class="clearfix"></div>
-                    <div class="ul_section_full">
-                        <ul class="ul_msg">
-                            <!-- <li><strong>Person Name</strong></li> -->
-                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-
-                        </ul>
-                        <i class="fa fa-share cursor-pointer mr-2 ml-2"></i>
-                        <i class="fa fa-ellipsis-h cursor-pointer"></i>
-                        <div class="clearfix"></div>
-                        <ul class="ul_msg2">
-                            <li><a href="#"><i class="fa fa-pencil"></i> </a></li>
-                            <li><a href="#"><i class="fa fa-trash chat-trash"></i></a></li>
-                        </ul>
-                    </div>
-
-                </div>
-                <div class="chatbox__body__message chatbox__body__message--left">
-
-                    <div class="chatbox_timing">
-                        <ul>
-
-                            <li><a href="#"> 7:00 PM</a></li>
-                        </ul>
-                    </div>
-
-                    <img src="{{asset('storage/images/users/'.Auth::user()->image)}}" alt="Picture">
-                    <div class="clearfix"></div>
-                    <div class="ul_section_full">
-                        <ul class="ul_msg">
-                            <!-- <li><strong>Person Name</strong></li> -->
-                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                        </ul>
-
-                        <i class="fa fa-share cursor-pointer mr-2 ml-2"></i>
-                        <i class="fa fa-ellipsis-h cursor-pointer"></i>
-                        <div class="clearfix"></div>
-                        <ul class="ul_msg2">
-                            <li><a href="#"><i class="fa fa-pencil"></i> </a></li>
-                            <li><a href="#"><i class="fa fa-trash chat-trash"></i></a></li>
-                        </ul>
-                    </div>
-
-                </div>
-                <div class="chatbox__body__message chatbox__body__message--right">
-
-                    <div class="chatbox_timing">
-                        <ul>
-
-                            <li><a href="#"> 7:00 PM</a></li>
-                        </ul>
-                    </div>
-
-                    <img src="{{asset('storage/images/users/'.Auth::user()->image)}}" alt="Picture">
-                    <div class="clearfix"></div>
-                    <div class="ul_section_full">
-                        <ul class="ul_msg">
-                            <!-- <li><strong>Person Name</strong></li> -->
-                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                        </ul>
-
-                        <i class="fa fa-share cursor-pointer mr-2 ml-2"></i>
-                        <i class="fa fa-ellipsis-h cursor-pointer"></i>
-                        <div class="clearfix"></div>
-                        <ul class="ul_msg2">
-                            <li><a href="#"><i class="fa fa-pencil"></i> </a></li>
-                            <li><a href="#"><i class="fa fa-trash chat-trash"></i></a></li>
-                        </ul>
-                    </div>
-
-                </div>
-                <div class="chatbox__body__message chatbox__body__message--left">
-
-                    <div class="chatbox_timing">
-                        <ul>
-
-                            <li><a href="#"> 7:00 PM</a></li>
-                        </ul>
-                    </div>
-
-                    <img src="{{asset('storage/images/users/'.Auth::user()->image)}}" alt="Picture">
-                    <div class="clearfix"></div>
-                    <div class="ul_section_full">
-                        <ul class="ul_msg">
-                            <!-- <li><strong>Person Name</strong></li> -->
-                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                        </ul>
-
-                        <i class="fa fa-share cursor-pointer mr-2 ml-2"></i>
-                        <i class="fa fa-ellipsis-h cursor-pointer"></i>
-                        <div class="clearfix"></div>
-                        <ul class="ul_msg2">
-                            <li><a href="#"><i class="fa fa-pencil"></i> </a></li>
-                            <li><a href="#"><i class="fa fa-trash chat-trash"></i></a></li>
-                        </ul>
-                    </div>
-
-                </div>
-            </div>
-            <div class="panel-footer">
-                <div class="input-group align-items-center">
-                    <div class="file-upload">
-                        <label for="file-input">
-                            <i class="fa fa-paperclip"></i>
-                        </label>
-
-                        <input id="file-input" accept="audio/*" type="file"/>
-                    </div>
-                    <input id="btn-input" type="text" class="form-control input-sm chat_set_height"
-                           placeholder="Type your message here..." tabindex="0" dir="ltr" spellcheck="false"
-                           autocomplete="off" autocorrect="off" autocapitalize="off" contenteditable="true"/>
-
-                    <span class="input-group-btn d-flex align-items-center">
-           <!-- <button class="btn bt_bg btn-sm" id="btn-chat">
-             Send</button> -->
-             <i class="fa fa-smile-o mr-2"> </i>
-             <div class="audio-upload">
-               <label for="audio-input">
-                 <i class="fa fa-microphone"></i>
-               </label>
-
-               <input id="audio-input" accept="audio/*" type="file"/>
-             </div>
-         </span>
-                </div>
-            </div>
-        </div>
-
-        <div class="chatbox chatbox22 ch2 d-none">
-            <div class="chatbox__title justify-content-between ">
-                <div>
-
-                    <h5>
-                        <div class="chat-img"><img src="{{asset('storage/images/users/'.Auth::user()->image)}}"
-                                                   alt="profile"/></div>
-                        <a href="javascript:void(0);">{{Auth::user()->name}}</a>
-                    </h5>
-
-                </div>
-                <!--<button class="chatbox__title__tray">
-                  <span></span>
-                </button>-->
-                <div class="d-flex justify-content-center align-items-center">
-         <span class="mr-3">
-         <i class="fa fa-video-camera text-white"></i>
-       </span>
-                    <span class="mr-2">
-         <i class="fa fa-phone text-white"></i>
-       </span>
-                    <span class="ct0">
-         -
-       </span>
-
-                    <button class="chatbox__title__close ctl2">
-         <span>
-           <svg viewBox="0 0 12 12" width="12px" height="12px">
-             <line stroke="#FFFFFF" x1="11.75" y1="0.25" x2="0.25" y2="11.75"></line>
-             <line stroke="#FFFFFF" x1="11.75" y1="11.75" x2="0.25" y2="0.25"></line>
-           </svg>
-         </span>
-                    </button>
-                </div>
-
-
-            </div>
-            <div class="chatbox__body">
-                <ul class="text-center">
-
-                    <li><a href="#"> 21/03/2021</a></li>
-                </ul>
-                <div class="chatbox__body__message chatbox__body__message--left">
-
-                    <div class="chatbox_timing">
-                        <ul>
-
-                            <li><a href="#"> 7:00 PM</a></li>
-                        </ul>
-                    </div>
-                    <img src="{{asset('storage/images/users/'.Auth::user()->image)}}" alt="Picture">
-                    <div class="clearfix"></div>
-                    <div class="ul_section_full">
-                        <ul class="ul_msg">
-                            <!-- <li><strong>Person Name</strong></li> -->
-                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                        </ul>
-                        <i class="fa fa-share cursor-pointer mr-2 ml-2"></i>
-                        <i class="fa fa-ellipsis-h cursor-pointer"></i>
-                        <div class="clearfix"></div>
-                        <ul class="ul_msg2">
-                            <li><a href="#"><i class="fa fa-pencil"></i> </a></li>
-                            <li><a href="#"><i class="fa fa-trash chat-trash"></i></a></li>
-                        </ul>
-                    </div>
-
-                </div>
-                <div class="chatbox__body__message chatbox__body__message--right">
-
-                    <div class="chatbox_timing">
-                        <ul>
-
-                            <li><a href="#"> 7:00 PM</a></li>
-                        </ul>
-                    </div>
-
-                    <img src="{{asset('storage/images/users/'.Auth::user()->image)}}" alt="Picture">
-                    <div class="clearfix"></div>
-                    <div class="ul_section_full">
-                        <ul class="ul_msg">
-                            <!-- <li><strong>Person Name</strong></li> -->
-                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-
-                        </ul>
-                        <i class="fa fa-share cursor-pointer mr-2 ml-2"></i>
-                        <i class="fa fa-ellipsis-h cursor-pointer"></i>
-                        <div class="clearfix"></div>
-                        <ul class="ul_msg2">
-                            <li><a href="#"><i class="fa fa-pencil"></i> </a></li>
-                            <li><a href="#"><i class="fa fa-trash chat-trash"></i></a></li>
-                        </ul>
-                    </div>
-
-                </div>
-                <div class="chatbox__body__message chatbox__body__message--left">
-
-                    <div class="chatbox_timing">
-                        <ul>
-
-                            <li><a href="#"> 7:00 PM</a></li>
-                        </ul>
-                    </div>
-
-                    <img src="{{asset('storage/images/users/'.Auth::user()->image)}}" alt="Picture">
-                    <div class="clearfix"></div>
-                    <div class="ul_section_full">
-                        <ul class="ul_msg">
-                            <!-- <li><strong>Person Name</strong></li> -->
-                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                        </ul>
-
-                        <i class="fa fa-share cursor-pointer mr-2 ml-2"></i>
-                        <i class="fa fa-ellipsis-h cursor-pointer"></i>
-                        <div class="clearfix"></div>
-                        <ul class="ul_msg2">
-                            <li><a href="#"><i class="fa fa-pencil"></i> </a></li>
-                            <li><a href="#"><i class="fa fa-trash chat-trash"></i></a></li>
-                        </ul>
-                    </div>
-
-                </div>
-                <div class="chatbox__body__message chatbox__body__message--right">
-
-                    <div class="chatbox_timing">
-                        <ul>
-
-                            <li><a href="#"> 7:00 PM</a></li>
-                        </ul>
-                    </div>
-
-                    <img src="{{asset('storage/images/users/'.Auth::user()->image)}}" alt="Picture">
-                    <div class="clearfix"></div>
-                    <div class="ul_section_full">
-                        <ul class="ul_msg">
-                            <!-- <li><strong>Person Name</strong></li> -->
-                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                        </ul>
-
-                        <i class="fa fa-share cursor-pointer mr-2 ml-2"></i>
-                        <i class="fa fa-ellipsis-h cursor-pointer"></i>
-                        <div class="clearfix"></div>
-                        <ul class="ul_msg2">
-                            <li><a href="#"><i class="fa fa-pencil"></i> </a></li>
-                            <li><a href="#"><i class="fa fa-trash chat-trash"></i></a></li>
-                        </ul>
-                    </div>
-
-                </div>
-                <div class="chatbox__body__message chatbox__body__message--left">
-
-                    <div class="chatbox_timing">
-                        <ul>
-
-                            <li><a href="#"> 7:00 PM</a></li>
-                        </ul>
-                    </div>
-
-                    <img src="{{asset('storage/images/users/'.Auth::user()->image)}}" alt="Picture">
-                    <div class="clearfix"></div>
-                    <div class="ul_section_full">
-                        <ul class="ul_msg">
-                            <!-- <li><strong>Person Name</strong></li> -->
-                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                        </ul>
-
-                        <i class="fa fa-share cursor-pointer mr-2 ml-2"></i>
-                        <i class="fa fa-ellipsis-h cursor-pointer"></i>
-                        <div class="clearfix"></div>
-                        <ul class="ul_msg2">
-                            <li><a href="#"><i class="fa fa-pencil"></i> </a></li>
-                            <li><a href="#"><i class="fa fa-trash chat-trash"></i></a></li>
-                        </ul>
-                    </div>
-
-                </div>
-            </div>
-            <div class="panel-footer">
-                <div class="input-group align-items-center">
-                    <div class="file-upload">
-                        <label for="file-input">
-                            <i class="fa fa-paperclip"></i>
-                        </label>
-
-                        <input id="file-input" accept="audio/*" type="file"/>
-                    </div>
-                    <input id="btn-input" type="text" class="form-control input-sm chat_set_height"
-                           placeholder="Type your message here..." tabindex="0" dir="ltr" spellcheck="false"
-                           autocomplete="off" autocorrect="off" autocapitalize="off" contenteditable="true"/>
-
-                    <span class="input-group-btn d-flex align-items-center">
-           <!-- <button class="btn bt_bg btn-sm" id="btn-chat">
-             Send</button> -->
-             <i class="fa fa-smile-o mr-2"> </i>
-             <div class="audio-upload">
-               <label for="audio-input">
-                 <i class="fa fa-microphone"></i>
-               </label>
-
-               <input id="audio-input" accept="audio/*" type="file"/>
-             </div>
-         </span>
-                </div>
-            </div>
-        </div>
-
-
-    </div>
     <!-- chatboxes -->
+    @livewire('friends-list')
+    @livewire('chat-widget')
+{{--<div class="row">
+    <div class="chatbox chatbox22 ch0 d-none">
+        <div class="chatbox__title justify-content-between ">
+            <div>
+                <h5>
+                    <div class="chat-img"><img src="{{Auth::user()->avatar_image}}" alt="profile"/></div>
+                    <a href="javascript:void(0);">{{Auth::user()->name}}</a>
+                </h5>
+            </div>
+            <!--<button class="chatbox__title__tray">
+              <span></span>
+            </button>-->
+            <div class="d-flex justify-content-center align-items-center">
+       <span class="mr-3">
+       <i class="fa fa-video-camera text-white"></i>
+     </span>
+                <span class="mr-2">
+       <i class="fa fa-phone text-white"></i>
+     </span>
+                <span class="ct0">
+       -
+     </span>
+                <button class="chatbox__title__close ctl0">
+       <span>
+         <svg viewBox="0 0 12 12" width="12px" height="12px">
+           <line stroke="#FFFFFF" x1="11.75" y1="0.25" x2="0.25" y2="11.75"></line>
+           <line stroke="#FFFFFF" x1="11.75" y1="11.75" x2="0.25" y2="0.25"></line>
+         </svg>
+       </span>
+                </button>
+            </div>
+        </div>
+
+        <div class="chatbox__body">
+            <ul class="text-center">
+                <li><a href="#"> 21/03/2021</a></li>
+            </ul>
+            <div class="chatbox__body__message chatbox__body__message--left">
+                <div class="chatbox_timing">
+                    <ul>
+                        <li><a href="#"> 7:00 PM</a></li>
+                    </ul>
+                </div>
+                <img src="{{Auth::user()->avatar_image}}" alt="Picture">
+                <div class="clearfix"></div>
+                <div class="ul_section_full">
+                    <ul class="ul_msg">
+                        <!-- <li><strong>Person Name</strong></li> -->
+                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                    </ul>
+                    <i class="fa fa-share cursor-pointer mr-2 ml-2"></i>
+                    <i class="fa fa-ellipsis-h cursor-pointer"></i>
+                    <div class="clearfix"></div>
+                    <ul class="ul_msg2">
+                        <li><a href="#"><i class="fa fa-pencil"></i> </a></li>
+                        <li><a href="#"><i class="fa fa-trash chat-trash"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="chatbox__body__message chatbox__body__message--right">
+                <div class="chatbox_timing">
+                    <ul>
+                        <li><a href="#"> 7:00 PM</a></li>
+                    </ul>
+                </div>
+                <img src="{{Auth::user()->avatar_image}}" alt="Picture">
+                <div class="clearfix"></div>
+                <div class="ul_section_full">
+                    <ul class="ul_msg">
+                        <!-- <li><strong>Person Name</strong></li> -->
+                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                    </ul>
+                    <i class="fa fa-share cursor-pointer mr-2 ml-2"></i>
+                    <i class="fa fa-ellipsis-h cursor-pointer"></i>
+                    <div class="clearfix"></div>
+                    <ul class="ul_msg2">
+                        <li><a href="#"><i class="fa fa-pencil"></i> </a></li>
+                        <li><a href="#"><i class="fa fa-trash chat-trash"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="chatbox__body__message chatbox__body__message--left">
+                <div class="chatbox_timing">
+                    <ul>
+                        <li><a href="#"> 7:00 PM</a></li>
+                    </ul>
+                </div>
+                <img src="{{Auth::user()->avatar_image}}" alt="Picture">
+                <div class="clearfix"></div>
+                <div class="ul_section_full">
+                    <ul class="ul_msg">
+                        <!-- <li><strong>Person Name</strong></li> -->
+                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                    </ul>
+                    <i class="fa fa-share cursor-pointer mr-2 ml-2"></i>
+                    <i class="fa fa-ellipsis-h cursor-pointer"></i>
+                    <div class="clearfix"></div>
+                    <ul class="ul_msg2">
+                        <li><a href="#"><i class="fa fa-pencil"></i> </a></li>
+                        <li><a href="#"><i class="fa fa-trash chat-trash"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="chatbox__body__message chatbox__body__message--right">
+                <div class="chatbox_timing">
+                    <ul>
+                        <li><a href="#"> 7:00 PM</a></li>
+                    </ul>
+                </div>
+                <img src="{{Auth::user()->avatar_image}}" alt="Picture">
+                <div class="clearfix"></div>
+                <div class="ul_section_full">
+                    <ul class="ul_msg">
+                        <!-- <li><strong>Person Name</strong></li> -->
+                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                    </ul>
+                    <i class="fa fa-share cursor-pointer mr-2 ml-2"></i>
+                    <i class="fa fa-ellipsis-h cursor-pointer"></i>
+                    <div class="clearfix"></div>
+                    <ul class="ul_msg2">
+                        <li><a href="#"><i class="fa fa-pencil"></i> </a></li>
+                        <li><a href="#"><i class="fa fa-trash chat-trash"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="chatbox__body__message chatbox__body__message--left">
+                <div class="chatbox_timing">
+                    <ul>
+                        <li><a href="#"> 7:00 PM</a></li>
+                    </ul>
+                </div>
+                <img src="{{Auth::user()->avatar_image}}" alt="Picture">
+                <div class="clearfix"></div>
+                <div class="ul_section_full">
+                    <ul class="ul_msg">
+                        <!-- <li><strong>Person Name</strong></li> -->
+                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                    </ul>
+
+                    <i class="fa fa-share cursor-pointer mr-2 ml-2"></i>
+                    <i class="fa fa-ellipsis-h cursor-pointer"></i>
+                    <div class="clearfix"></div>
+                    <ul class="ul_msg2">
+                        <li><a href="#"><i class="fa fa-pencil"></i> </a></li>
+                        <li><a href="#"><i class="fa fa-trash chat-trash"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-footer">
+            <div class="input-group align-items-center">
+                <div class="file-upload">
+                    <label for="file-input">
+                        <i class="fa fa-paperclip"></i>
+                    </label>
+
+                    <input id="file-input" accept="audio/*" type="file"/>
+                </div>
+                <input id="btn-input" type="text" class="form-control input-sm chat_set_height"
+                       placeholder="Type your message here..." tabindex="0" dir="ltr" spellcheck="false"
+                       autocomplete="off" autocorrect="off" autocapitalize="off" contenteditable="true"/>
+
+                <span class="input-group-btn d-flex align-items-center">
+       <!-- <button class="btn bt_bg btn-sm" id="btn-chat">
+         Send</button> -->
+         <i class="fa fa-smile-o mr-2"> </i>
+         <div class="audio-upload">
+           <label for="audio-input">
+             <i class="fa fa-microphone"></i>
+           </label>
+
+           <input id="audio-input" accept="audio/*" type="file"/>
+         </div>
+     </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="chatbox chatbox22 ch2 d-none">
+        <div class="chatbox__title justify-content-between ">
+            <div>
+
+                <h5>
+                    <div class="chat-img"><img src="{{Auth::user()->avatar_image}}"
+                                               alt="profile"/></div>
+                    <a href="javascript:void(0);">{{Auth::user()->name}}</a>
+                </h5>
+
+            </div>
+            <!--<button class="chatbox__title__tray">
+              <span></span>
+            </button>-->
+            <div class="d-flex justify-content-center align-items-center">
+     <span class="mr-3">
+     <i class="fa fa-video-camera text-white"></i>
+   </span>
+                <span class="mr-2">
+     <i class="fa fa-phone text-white"></i>
+   </span>
+                <span class="ct0">
+     -
+   </span>
+
+                <button class="chatbox__title__close ctl2">
+     <span>
+       <svg viewBox="0 0 12 12" width="12px" height="12px">
+         <line stroke="#FFFFFF" x1="11.75" y1="0.25" x2="0.25" y2="11.75"></line>
+         <line stroke="#FFFFFF" x1="11.75" y1="11.75" x2="0.25" y2="0.25"></line>
+       </svg>
+     </span>
+                </button>
+            </div>
+
+
+        </div>
+        <div class="chatbox__body">
+            <ul class="text-center">
+
+                <li><a href="#"> 21/03/2021</a></li>
+            </ul>
+            <div class="chatbox__body__message chatbox__body__message--left">
+
+                <div class="chatbox_timing">
+                    <ul>
+
+                        <li><a href="#"> 7:00 PM</a></li>
+                    </ul>
+                </div>
+                <img src="{{Auth::user()->avatar_image}}" alt="Picture">
+                <div class="clearfix"></div>
+                <div class="ul_section_full">
+                    <ul class="ul_msg">
+                        <!-- <li><strong>Person Name</strong></li> -->
+                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                    </ul>
+                    <i class="fa fa-share cursor-pointer mr-2 ml-2"></i>
+                    <i class="fa fa-ellipsis-h cursor-pointer"></i>
+                    <div class="clearfix"></div>
+                    <ul class="ul_msg2">
+                        <li><a href="#"><i class="fa fa-pencil"></i> </a></li>
+                        <li><a href="#"><i class="fa fa-trash chat-trash"></i></a></li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="chatbox__body__message chatbox__body__message--right">
+
+                <div class="chatbox_timing">
+                    <ul>
+
+                        <li><a href="#"> 7:00 PM</a></li>
+                    </ul>
+                </div>
+
+                <img src="{{Auth::user()->avatar_image}}" alt="Picture">
+                <div class="clearfix"></div>
+                <div class="ul_section_full">
+                    <ul class="ul_msg">
+                        <!-- <li><strong>Person Name</strong></li> -->
+                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+
+                    </ul>
+                    <i class="fa fa-share cursor-pointer mr-2 ml-2"></i>
+                    <i class="fa fa-ellipsis-h cursor-pointer"></i>
+                    <div class="clearfix"></div>
+                    <ul class="ul_msg2">
+                        <li><a href="#"><i class="fa fa-pencil"></i> </a></li>
+                        <li><a href="#"><i class="fa fa-trash chat-trash"></i></a></li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="chatbox__body__message chatbox__body__message--left">
+
+                <div class="chatbox_timing">
+                    <ul>
+
+                        <li><a href="#"> 7:00 PM</a></li>
+                    </ul>
+                </div>
+
+                <img src="{{Auth::user()->avatar_image}}" alt="Picture">
+                <div class="clearfix"></div>
+                <div class="ul_section_full">
+                    <ul class="ul_msg">
+                        <!-- <li><strong>Person Name</strong></li> -->
+                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                    </ul>
+
+                    <i class="fa fa-share cursor-pointer mr-2 ml-2"></i>
+                    <i class="fa fa-ellipsis-h cursor-pointer"></i>
+                    <div class="clearfix"></div>
+                    <ul class="ul_msg2">
+                        <li><a href="#"><i class="fa fa-pencil"></i> </a></li>
+                        <li><a href="#"><i class="fa fa-trash chat-trash"></i></a></li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="chatbox__body__message chatbox__body__message--right">
+
+                <div class="chatbox_timing">
+                    <ul>
+
+                        <li><a href="#"> 7:00 PM</a></li>
+                    </ul>
+                </div>
+
+                <img src="{{Auth::user()->avatar_image}}" alt="Picture">
+                <div class="clearfix"></div>
+                <div class="ul_section_full">
+                    <ul class="ul_msg">
+                        <!-- <li><strong>Person Name</strong></li> -->
+                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                    </ul>
+
+                    <i class="fa fa-share cursor-pointer mr-2 ml-2"></i>
+                    <i class="fa fa-ellipsis-h cursor-pointer"></i>
+                    <div class="clearfix"></div>
+                    <ul class="ul_msg2">
+                        <li><a href="#"><i class="fa fa-pencil"></i> </a></li>
+                        <li><a href="#"><i class="fa fa-trash chat-trash"></i></a></li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="chatbox__body__message chatbox__body__message--left">
+
+                <div class="chatbox_timing">
+                    <ul>
+
+                        <li><a href="#"> 7:00 PM</a></li>
+                    </ul>
+                </div>
+
+                <img src="{{Auth::user()->avatar_image}}" alt="Picture">
+                <div class="clearfix"></div>
+                <div class="ul_section_full">
+                    <ul class="ul_msg">
+                        <!-- <li><strong>Person Name</strong></li> -->
+                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                    </ul>
+
+                    <i class="fa fa-share cursor-pointer mr-2 ml-2"></i>
+                    <i class="fa fa-ellipsis-h cursor-pointer"></i>
+                    <div class="clearfix"></div>
+                    <ul class="ul_msg2">
+                        <li><a href="#"><i class="fa fa-pencil"></i> </a></li>
+                        <li><a href="#"><i class="fa fa-trash chat-trash"></i></a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="input-group align-items-center">
+                <div class="file-upload">
+                    <label for="file-input">
+                        <i class="fa fa-paperclip"></i>
+                    </label>
+
+                    <input id="file-input" accept="audio/*" type="file"/>
+                </div>
+                <input id="btn-input" type="text" class="form-control input-sm chat_set_height"
+                       placeholder="Type your message here..." tabindex="0" dir="ltr" spellcheck="false"
+                       autocomplete="off" autocorrect="off" autocapitalize="off" contenteditable="true"/>
+
+                <span class="input-group-btn d-flex align-items-center">
+       <!-- <button class="btn bt_bg btn-sm" id="btn-chat">
+         Send</button> -->
+         <i class="fa fa-smile-o mr-2"> </i>
+         <div class="audio-upload">
+           <label for="audio-input">
+             <i class="fa fa-microphone"></i>
+           </label>
+
+           <input id="audio-input" accept="audio/*" type="file"/>
+         </div>
+     </span>
+            </div>
+        </div>
+    </div>
+
+</div>--}}
+<!-- chatboxes -->
     <!-- Right side bar -->
     <aside id="rightSideBar">
         <ul class="right-menu-to-hide right-bar-buttons text-center md-0">
@@ -1545,497 +1314,10 @@
             </div>
         </div>
     </aside>
-
     <!-- Right side bar end-->
-    <aside id="chat-widget-messages" class="chat-widget closed sidebar right">
-        <!-- CHAT WIDGET MESSAGES -->
-        <div class="chat-widget-messages" data-simplebar>
-            <!-- CHAT WIDGET MESSAGE -->
-            <div class="chat-widget-message">
-                <!-- USER STATUS -->
-                <div class="user-status">
-                    <!-- USER STATUS AVATAR -->
-                    <div class="user-status-avatar">
-                        <!-- USER AVATAR -->
-                        <div class="user-avatar small no-outline online">
-                            <!-- USER AVATAR CONTENT -->
-                            <div class="user-avatar-content">
-                                <!-- HEXAGON -->
-                                <img src="{{asset('img/avatar/03.jpg')}}" alt>
-                                <!-- /HEXAGON -->
-                            </div>
-                        </div>
-                        <!-- /USER AVATAR -->
-                    </div>
-                    <!-- /USER STATUS AVATAR -->
 
-                    <!-- USER STATUS TITLE -->
-                    <p class="user-status-title"><span class="bold">Nick Grissom</span></p>
-                    <!-- /USER STATUS TITLE -->
-
-                    <!-- USER STATUS TEXT -->
-                    <p class="user-status-text small">Can you stream the new game?</p>
-                    <!-- /USER STATUS TEXT -->
-
-                    <!-- USER STATUS TIMESTAMP -->
-                    <p class="user-status-timestamp floaty">2hrs</p>
-                    <!-- /USER STATUS TIMESTAMP -->
-                </div>
-                <!-- /USER STATUS -->
-            </div>
-            <!-- /CHAT WIDGET MESSAGE -->
-
-            <!-- CHAT WIDGET MESSAGE -->
-            <div class="chat-widget-message">
-                <!-- USER STATUS -->
-                <div class="user-status">
-                    <!-- USER STATUS AVATAR -->
-                    <div class="user-status-avatar">
-                        <!-- USER AVATAR -->
-                        <div class="user-avatar small no-outline online">
-                            <!-- USER AVATAR CONTENT -->
-                            <div class="user-avatar-content">
-                                <!-- HEXAGON -->
-                                <img src="{{asset('img/avatar/04.jpg')}}" alt>
-                                <!-- /HEXAGON -->
-                            </div>
-                        </div>
-                        <!-- /USER AVATAR -->
-                    </div>
-                    <!-- /USER STATUS AVATAR -->
-
-                    <!-- USER STATUS TITLE -->
-                    <p class="user-status-title"><span class="bold">Matt Parker</span></p>
-                    <!-- /USER STATUS TITLE -->
-
-                    <!-- USER STATUS TEXT -->
-                    <p class="user-status-text small">Can you stream the new game?</p>
-                    <!-- /USER STATUS TEXT -->
-
-                    <!-- USER STATUS TIMESTAMP -->
-                    <p class="user-status-timestamp floaty">2hrs</p>
-                    <!-- /USER STATUS TIMESTAMP -->
-                </div>
-                <!-- /USER STATUS -->
-            </div>
-            <!-- /CHAT WIDGET MESSAGE -->
-
-            <!-- CHAT WIDGET MESSAGE -->
-            <div class="chat-widget-message">
-                <!-- USER STATUS -->
-                <div class="user-status">
-                    <!-- USER STATUS AVATAR -->
-                    <div class="user-status-avatar">
-                        <!-- USER AVATAR -->
-                        <div class="user-avatar small no-outline online">
-                            <!-- USER AVATAR CONTENT -->
-                            <div class="user-avatar-content">
-                                <!-- HEXAGON -->
-                                <img src="{{asset('img/avatar/05.jpg')}}" alt>
-                                <!-- /HEXAGON -->
-                            </div>
-                        </div>
-                        <!-- /USER AVATAR -->
-                    </div>
-                    <!-- /USER STATUS AVATAR -->
-
-                    <!-- USER STATUS TITLE -->
-                    <p class="user-status-title"><span class="bold">Neko Bebop</span></p>
-                    <!-- /USER STATUS TITLE -->
-
-                    <!-- USER STATUS TEXT -->
-                    <p class="user-status-text small">Awesome! I'll see you there!</p>
-                    <!-- /USER STATUS TEXT -->
-
-                    <!-- USER STATUS TIMESTAMP -->
-                    <p class="user-status-timestamp floaty">54mins</p>
-                    <!-- /USER STATUS TIMESTAMP -->
-                </div>
-                <!-- /USER STATUS -->
-            </div>
-            <!-- /CHAT WIDGET MESSAGE -->
-
-            <!-- CHAT WIDGET MESSAGE -->
-            <div class="chat-widget-message">
-                <!-- USER STATUS -->
-                <div class="user-status">
-                    <!-- USER STATUS AVATAR -->
-                    <div class="user-status-avatar">
-                        <!-- USER AVATAR -->
-                        <div class="user-avatar small no-outline online">
-                            <!-- USER AVATAR CONTENT -->
-                            <div class="user-avatar-content">
-                                <!-- HEXAGON -->
-                                <img src="{{asset('img/avatar/03.jpg')}}" alt>
-                                <!-- /HEXAGON -->
-                            </div>
-                        </div>
-                        <!-- /USER AVATAR -->
-                    </div>
-                    <!-- /USER STATUS AVATAR -->
-
-                    <!-- USER STATUS TITLE -->
-                    <p class="user-status-title"><span class="bold">Bearded Wonder</span></p>
-                    <!-- /USER STATUS TITLE -->
-
-                    <!-- USER STATUS TEXT -->
-                    <p class="user-status-text small">Great! Then we'll meet with them at...</p>
-                    <!-- /USER STATUS TEXT -->
-
-                    <!-- USER STATUS TIMESTAMP -->
-                    <p class="user-status-timestamp floaty">2hrs</p>
-                    <!-- /USER STATUS TIMESTAMP -->
-                </div>
-                <!-- /USER STATUS -->
-            </div>
-            <!-- /CHAT WIDGET MESSAGE -->
-
-            <!-- CHAT WIDGET MESSAGE -->
-            <div class="chat-widget-message">
-                <!-- USER STATUS -->
-                <div class="user-status">
-                    <!-- USER STATUS AVATAR -->
-                    <div class="user-status-avatar">
-                        <!-- USER AVATAR -->
-                        <div class="user-avatar small no-outline online">
-                            <!-- USER AVATAR CONTENT -->
-                            <div class="user-avatar-content">
-                                <!-- HEXAGON -->
-                                <img src="{{asset('img/avatar/09.jpg')}}" alt>
-                                <!-- /HEXAGON -->
-                            </div>
-                        </div>
-                        <!-- /USER AVATAR -->
-                    </div>
-                    <!-- /USER STATUS AVATAR -->
-
-                    <!-- USER STATUS TITLE -->
-                    <p class="user-status-title"><span class="bold">Sandra Strange</span></p>
-                    <!-- /USER STATUS TITLE -->
-
-                    <!-- USER STATUS TEXT -->
-                    <p class="user-status-text small">Can you stream the new game?</p>
-                    <!-- /USER STATUS TEXT -->
-
-                    <!-- USER STATUS TIMESTAMP -->
-                    <p class="user-status-timestamp floaty">2hrs</p>
-                    <!-- /USER STATUS TIMESTAMP -->
-                </div>
-                <!-- /USER STATUS -->
-            </div>
-            <!-- /CHAT WIDGET MESSAGE -->
-
-            <!-- CHAT WIDGET MESSAGE -->
-            <div class="chat-widget-message">
-                <!-- USER STATUS -->
-                <div class="user-status">
-                    <!-- USER STATUS AVATAR -->
-                    <div class="user-status-avatar">
-                        <!-- USER AVATAR -->
-                        <div class="user-avatar small no-outline online">
-                            <!-- USER AVATAR CONTENT -->
-                            <div class="user-avatar-content">
-                                <!-- HEXAGON -->
-                                <img src="{{asset('img/avatar/12.jpg')}}" alt>
-                                <!-- /HEXAGON -->
-                            </div>
-                        </div>
-                        <!-- /USER AVATAR -->
-                    </div>
-                    <!-- /USER STATUS AVATAR -->
-
-                    <!-- USER STATUS TITLE -->
-                    <p class="user-status-title"><span class="bold">James Murdock</span></p>
-                    <!-- /USER STATUS TITLE -->
-
-                    <!-- USER STATUS TEXT -->
-                    <p class="user-status-text small">Great! Then we'll meet with them at...</p>
-                    <!-- /USER STATUS TEXT -->
-
-                    <!-- USER STATUS TIMESTAMP -->
-                    <p class="user-status-timestamp floaty">7hrs</p>
-                    <!-- /USER STATUS TIMESTAMP -->
-                </div>
-                <!-- /USER STATUS -->
-            </div>
-            <!-- /CHAT WIDGET MESSAGE -->
-
-            <!-- CHAT WIDGET MESSAGE -->
-            <div class="chat-widget-message">
-                <!-- USER STATUS -->
-                <div class="user-status">
-                    <!-- USER STATUS AVATAR -->
-                    <div class="user-status-avatar">
-                        <!-- USER AVATAR -->
-                        <div class="user-avatar small no-outline online">
-                            <!-- USER AVATAR CONTENT -->
-                            <div class="user-avatar-content">
-                                <!-- HEXAGON -->
-                                <img src="{{asset('img/avatar/10.jpg')}}" alt>
-                                <!-- /HEXAGON -->
-                            </div>
-                        </div>
-                        <!-- /USER AVATAR -->
-                    </div>
-                    <!-- /USER STATUS AVATAR -->
-
-                    <!-- USER STATUS TITLE -->
-                    <p class="user-status-title"><span class="bold">The Green Goo</span></p>
-                    <!-- /USER STATUS TITLE -->
-
-                    <!-- USER STATUS TEXT -->
-                    <p class="user-status-text small">Can you stream the new game?</p>
-                    <!-- /USER STATUS TEXT -->
-
-                    <!-- USER STATUS TIMESTAMP -->
-                    <p class="user-status-timestamp floaty">2hrs</p>
-                    <!-- /USER STATUS TIMESTAMP -->
-                </div>
-                <!-- /USER STATUS -->
-            </div>
-            <!-- /CHAT WIDGET MESSAGE -->
-
-            <!-- CHAT WIDGET MESSAGE -->
-            <div class="chat-widget-message">
-                <!-- USER STATUS -->
-                <div class="user-status">
-                    <!-- USER STATUS AVATAR -->
-                    <div class="user-status-avatar">
-                        <!-- USER AVATAR -->
-                        <div class="user-avatar small no-outline online">
-                            <!-- USER AVATAR CONTENT -->
-                            <div class="user-avatar-content">
-                                <!-- HEXAGON -->
-                                <img src="{{asset('img/avatar/07.jpg')}}" alt>
-                                <!-- /HEXAGON -->
-                            </div>
-                        </div>
-                        <!-- /USER AVATAR -->
-                    </div>
-                    <!-- /USER STATUS AVATAR -->
-
-                    <!-- USER STATUS TITLE -->
-                    <p class="user-status-title"><span class="bold">Sarah Diamond</span></p>
-                    <!-- /USER STATUS TITLE -->
-
-                    <!-- USER STATUS TEXT -->
-                    <p class="user-status-text small">I'm sending you the latest news of...</p>
-                    <!-- /USER STATUS TEXT -->
-
-                    <!-- USER STATUS TIMESTAMP -->
-                    <p class="user-status-timestamp floaty">16hrs</p>
-                    <!-- /USER STATUS TIMESTAMP -->
-                </div>
-                <!-- /USER STATUS -->
-            </div>
-            <!-- /CHAT WIDGET MESSAGE -->
-
-            <!-- CHAT WIDGET MESSAGE -->
-            <div class="chat-widget-message">
-                <!-- USER STATUS -->
-                <div class="user-status">
-                    <!-- USER STATUS AVATAR -->
-                    <div class="user-status-avatar">
-                        <!-- USER AVATAR -->
-                        <div class="user-avatar small no-outline online">
-                            <!-- USER AVATAR CONTENT -->
-                            <div class="user-avatar-content">
-                                <!-- HEXAGON -->
-                                <img src="{{asset('img/avatar/03.jpg')}}" alt>
-                                <!-- /HEXAGON -->
-                            </div>
-                        </div>
-                        <!-- /USER AVATAR -->
-                    </div>
-                    <!-- /USER STATUS AVATAR -->
-
-                    <!-- USER STATUS TITLE -->
-                    <p class="user-status-title"><span class="bold">Destroy Dex</span></p>
-                    <!-- /USER STATUS TITLE -->
-
-                    <!-- USER STATUS TEXT -->
-                    <p class="user-status-text small">Can you stream the new game?</p>
-                    <!-- /USER STATUS TEXT -->
-
-                    <!-- USER STATUS TIMESTAMP -->
-                    <p class="user-status-timestamp floaty">2hrs</p>
-                    <!-- /USER STATUS TIMESTAMP -->
-                </div>
-                <!-- /USER STATUS -->
-            </div>
-            <!-- /CHAT WIDGET MESSAGE -->
-
-            <!-- CHAT WIDGET MESSAGE -->
-            <div class="chat-widget-message">
-                <!-- USER STATUS -->
-                <div class="user-status">
-                    <!-- USER STATUS AVATAR -->
-                    <div class="user-status-avatar">
-                        <!-- USER AVATAR -->
-                        <div class="user-avatar small no-outline online">
-                            <!-- USER AVATAR CONTENT -->
-                            <div class="user-avatar-content">
-                                <!-- HEXAGON -->
-                                <img src="{{asset('img/avatar/03.jpg')}}" alt>
-                                <!-- /HEXAGON -->
-                            </div>
-                        </div>
-                        <!-- /USER AVATAR -->
-                    </div>
-                    <!-- /USER STATUS AVATAR -->
-
-                    <!-- USER STATUS TITLE -->
-                    <p class="user-status-title"><span class="bold">Damian Greyson</span></p>
-                    <!-- /USER STATUS TITLE -->
-
-                    <!-- USER STATUS TEXT -->
-                    <p class="user-status-text small">Can you stream the new game?</p>
-                    <!-- /USER STATUS TEXT -->
-
-                    <!-- USER STATUS TIMESTAMP -->
-                    <p class="user-status-timestamp floaty">2hrs</p>
-                    <!-- /USER STATUS TIMESTAMP -->
-                </div>
-                <!-- /USER STATUS -->
-            </div>
-            <!-- /CHAT WIDGET MESSAGE -->
-
-            <!-- CHAT WIDGET MESSAGE -->
-            <div class="chat-widget-message">
-                <!-- USER STATUS -->
-                <div class="user-status">
-                    <!-- USER STATUS AVATAR -->
-                    <div class="user-status-avatar">
-                        <!-- USER AVATAR -->
-                        <div class="user-avatar small no-outline online">
-                            <!-- USER AVATAR CONTENT -->
-                            <div class="user-avatar-content">
-                                <!-- HEXAGON -->
-                                <img src="{{asset('img/avatar/14.jpg')}}">
-                                <!-- /HEXAGON -->
-                            </div>
-                            <!-- /USER AVATAR CONTENT -->
-
-                            <!-- USER AVATAR PROGRESS -->
-                            <div class="user-avatar-progress">
-                                <!-- HEXAGON -->
-                                <div class="hexagon-progress-40-44"></div>
-                                <!-- /HEXAGON -->
-                            </div>
-                            <!-- /USER AVATAR PROGRESS -->
-
-                            <!-- USER AVATAR PROGRESS BORDER -->
-                            <div class="user-avatar-progress-border">
-                                <!-- HEXAGON -->
-                                <div class="hexagon-border-40-44"></div>
-                                <!-- /HEXAGON -->
-                            </div>
-                            <!-- /USER AVATAR PROGRESS BORDER -->
-
-                            <!-- USER AVATAR BADGE -->
-                            <div class="user-avatar-badge">
-                                <!-- USER AVATAR BADGE BORDER -->
-                                <div class="user-avatar-badge-border">
-                                    <!-- HEXAGON -->
-                                    <div class="hexagon-22-24"></div>
-                                    <!-- /HEXAGON -->
-                                </div>
-                                <!-- /USER AVATAR BADGE BORDER -->
-
-                                <!-- USER AVATAR BADGE CONTENT -->
-                                <div class="user-avatar-badge-content">
-                                    <!-- HEXAGON -->
-                                    <div class="hexagon-dark-16-18"></div>
-                                    <!-- /HEXAGON -->
-                                </div>
-                                <!-- /USER AVATAR BADGE CONTENT -->
-
-                                <!-- USER AVATAR BADGE TEXT -->
-                                <p class="user-avatar-badge-text">3</p>
-                                <!-- /USER AVATAR BADGE TEXT -->
-                            </div>
-                            <!-- /USER AVATAR BADGE -->
-                        </div>
-                        <!-- /USER AVATAR -->
-                    </div>
-                    <!-- /USER STATUS AVATAR -->
-
-                    <!-- USER STATUS TITLE -->
-                    <p class="user-status-title"><span class="bold">Paul Lang</span></p>
-                    <!-- /USER STATUS TITLE -->
-
-                    <!-- USER STATUS TEXT -->
-                    <p class="user-status-text small">Can you stream the new game?</p>
-                    <!-- /USER STATUS TEXT -->
-
-                    <!-- USER STATUS TIMESTAMP -->
-                    <p class="user-status-timestamp floaty">2hrs</p>
-                    <!-- /USER STATUS TIMESTAMP -->
-                </div>
-                <!-- /USER STATUS -->
-            </div>
-            <!-- /CHAT WIDGET MESSAGE -->
-        </div>
-        <!-- /CHAT WIDGET MESSAGES -->
-
-        <!-- CHAT WIDGET FORM -->
-        <form class="chat-widget-form">
-            <!-- INTERACTIVE INPUT -->
-            <div class="interactive-input small">
-                <input type="text" id="chat-widget-search" name="chat_widget_search" placeholder="Search Messages...">
-                <!-- INTERACTIVE INPUT ICON WRAP -->
-                <div class="interactive-input-icon-wrap">
-                    <!-- INTERACTIVE INPUT ICON -->
-                    <svg class="interactive-input-icon icon-magnifying-glass">
-                        <use xlink:href="#svg-magnifying-glass"></use>
-                    </svg>
-                    <!-- /INTERACTIVE INPUT ICON -->
-                </div>
-                <!-- /INTERACTIVE INPUT ICON WRAP -->
-
-                <!-- INTERACTIVE INPUT ACTION -->
-                <div class="interactive-input-action">
-                    <!-- INTERACTIVE INPUT ACTION ICON -->
-                    <svg class="interactive-input-action-icon icon-cross-thin">
-                        <use xlink:href="#svg-cross-thin"></use>
-                    </svg>
-                    <!-- /INTERACTIVE INPUT ACTION ICON -->
-                </div>
-                <!-- /INTERACTIVE INPUT ACTION -->
-            </div>
-            <!-- /INTERACTIVE INPUT -->
-        </form>
-        <!-- /CHAT WIDGET FORM -->
-
-        <!-- CHAT WIDGET BUTTON -->
-        <div class="chat-widget-button">
-            <!-- CHAT WIDGET BUTTON ICON -->
-            <div class="chat-widget-button-icon">
-                <!-- BURGER ICON -->
-                <div class="burger-icon">
-                    <!-- BURGER ICON BAR -->
-                    <div class="burger-icon-bar"></div>
-                    <!-- /BURGER ICON BAR -->
-
-                    <!-- BURGER ICON BAR -->
-                    <div class="burger-icon-bar"></div>
-                    <!-- /BURGER ICON BAR -->
-
-                    <!-- BURGER ICON BAR -->
-                    <div class="burger-icon-bar"></div>
-                    <!-- /BURGER ICON BAR -->
-                </div>
-                <!-- /BURGER ICON -->
-            </div>
-            <!-- /CHAT WIDGET BUTTON ICON -->
-
-            <!-- CHAT WIDGET BUTTON TEXT -->
-            <p class="chat-widget-button-text">Messages / Chat</p>
-            <!-- /CHAT WIDGET BUTTON TEXT -->
-        </div>
-        <!-- /CHAT WIDGET BUTTON -->
-    </aside>
-
+    <!-- Right side bar chat START-->
+    <!-- Right side bar chat END-->
     <aside id="chat-widget-message" class="chat-widget chat-widget-overlay sidebar right hidden" style="">
         <!-- CHAT WIDGET HEADER -->
         <div class="chat-widget-header">
@@ -2275,14 +1557,16 @@
             <!-- /INTERACTIVE INPUT -->
         </form>
         <!-- /CHAT WIDGET FORM -->
-    </aside>--}}
+    </aside>
+    --}}
 
     <header class="header">
         <a class="navbar-brand p-0" href="{{route('home')}}">
             {{--<img src="http://fyrestream.com//content/themes/default/frontend/images/Fyre 01.svg" alt="brand-logo">
             <img src="http://fyrestream.com//content/themes/default/frontend/images/Fyre 02.svg" class="nav-logo-text"
                  alt="brand-logo">--}}
-            {{ config('app.name', 'Laravel') }}
+            <img src="http://fyrestream.com//content/themes/default/frontend/images/Fyre 02.svg" class="nav-logo-text"
+                 alt="brand-logo">
         </a>
         <button class="navbar-toggler" id="res-btn" type="button" data-toggle="collapse"
                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -2411,7 +1695,7 @@
                         <!-- /DROPDOWN BOX LIST -->
 
                         <!-- DROPDOWN BOX BUTTON -->
-                        <a class="dropdown-box-button primary" href="#">View all Messages</a>
+                        <a class="dropdown-box-button primary" href="{{url('chat')}}">View all Messages</a>
                         <!-- /DROPDOWN BOX BUTTON -->
                     </div>
                 </li>
@@ -2699,7 +1983,7 @@
                         <!-- /DROPDOWN BOX LIST -->
 
                         <!-- DROPDOWN BOX BUTTON -->
-                        <a class="dropdown-box-button primary" href="#">View all Messages</a>
+                        <a class="dropdown-box-button primary" href="{{url('chat')}}">View all Messages</a>
                         <!-- /DROPDOWN BOX BUTTON -->
                     </div>
                 </li>
@@ -2711,7 +1995,7 @@
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {{ Auth::user()->name }}
                       @if(Auth::user()->image)
-                          <img src="{{asset('storage/images/users/'.Auth::user()->image)}}"
+                          <img src="{{Auth::user()->avatar_image}}"
                                style="    width: 40px; height: 40px;   border-radius: 50%;" alt="{{Auth::user()->name}}"
                                class="ml-2">
                       @elseif(Auth::user()->gender === "male")
@@ -2878,39 +2162,16 @@
 
 
         $(".chat-widget-message .user-status").on("click", function () {
+
             if ($('.ch0').hasClass("d-none")) {
                 $('.ch0').removeClass("d-none");
                 $('.ch0').addClass("d-block");
-                widthSetter()
-            } else {
-                if ($('.ch1').hasClass("d-none")) {
-                    $('.ch1').removeClass("d-none");
-                    $('.ch1').addClass("d-block");
-                    widthSetter()
-
-                } else {
-                    if ($('.ch2').hasClass("d-none")) {
-                        $('.ch2').removeClass("d-none");
-                        $('.ch2').addClass("d-block");
-                        widthSetter()
-
-                    } else {
-                        $('.ch0').addClass("d-none");
-                        $('.ch0').removeClass("d-block");
-                        $('.ch0').addClass("d-block");
-
-                    }
-                }
             }
-
-            mq1(x);
-            mq2(x2);
         });
 
         var $chatbox = $('.ch0'),
             $chatboxTitle = $('.ct0'),
-            $chatboxTitleClose = $('.ctl0'),
-            $chatboxCredentials = $('.chatbox__credentials');
+            $chatboxTitleClose = $('.ctl0');
         $chatboxTitle.on('click', function () {
             $chatbox.toggleClass('chatbox--tray');
         });
@@ -2919,98 +2180,102 @@
             // $chatbox.addClass('chatbox--closed');
             $chatbox.addClass('d-none');
             $chatbox.removeClass('d-block');
-            widthSetter();
         });
         $chatbox.on('transitionend', function () {
             if ($chatbox.hasClass('chatbox--closed')) $chatbox.remove();
         });
 
-        var $chatbox1 = $('.ch1'),
-            $chatboxTitle1 = $('.ct1'),
-            $chatboxTitleClose1 = $('.ctl1'),
-            $chatboxCredentials1 = $('.chatbox__credentials1');
-        $chatboxTitle1.on('click', function () {
-            $chatbox1.toggleClass('chatbox--tray');
-        });
-        $chatboxTitleClose1.on('click', function (e) {
-            e.stopPropagation();
-            // $chatbox1.addClass('chatbox--closed');
-            $chatbox1.addClass('d-none');
-            $chatbox1.removeClass('d-block');
-            widthSetter()
-        });
-        $chatbox1.on('transitionend', function () {
-            if ($chatbox1.hasClass('chatbox--closed')) $chatbox1.remove();
-        });
+        /*
+
+        this is for multiple chat box open, currently occur the issue
+
+                var $chatbox1 = $('.ch1'),
+                    $chatboxTitle1 = $('.ct1'),
+                    $chatboxTitleClose1 = $('.ctl1'),
+                    $chatboxCredentials1 = $('.chatbox__credentials1');
+                $chatboxTitle1.on('click', function () {
+                    $chatbox1.toggleClass('chatbox--tray');
+                });
+                $chatboxTitleClose1.on('click', function (e) {
+                    e.stopPropagation();
+                    // $chatbox1.addClass('chatbox--closed');
+                    $chatbox1.addClass('d-none');
+                    $chatbox1.removeClass('d-block');
+                    widthSetter()
+                });
+                $chatbox1.on('transitionend', function () {
+                    if ($chatbox1.hasClass('chatbox--closed')) $chatbox1.remove();
+                });
 
 
-        var $chatbox2 = $('.ch2'),
-            $chatboxTitle2 = $('.ct2'),
-            $chatboxTitleClose2 = $('.ctl2'),
-            $chatboxCredentials2 = $('.chatbox__credentials2');
-        $chatboxTitle2.on('click', function () {
-            $chatbox2.toggleClass('chatbox--tray');
-        });
-        $chatboxTitleClose2.on('click', function (e) {
-            e.stopPropagation();
-            // $chatbox2.addClass('chatbox--closed');
-            $chatbox2.addClass('d-none');
-            $chatbox2.removeClass('d-block');
-            widthSetter()
-        });
-        $chatbox2.on('transitionend', function () {
-            if ($chatbox2.hasClass('chatbox--closed')) $chatbox1.remove();
-        });
+                var $chatbox2 = $('.ch2'),
+                    $chatboxTitle2 = $('.ct2'),
+                    $chatboxTitleClose2 = $('.ctl2'),
+                    $chatboxCredentials2 = $('.chatbox__credentials2');
+                $chatboxTitle2.on('click', function () {
+                    $chatbox2.toggleClass('chatbox--tray');
+                });
+                $chatboxTitleClose2.on('click', function (e) {
+                    e.stopPropagation();
+                    // $chatbox2.addClass('chatbox--closed');
+                    $chatbox2.addClass('d-none');
+                    $chatbox2.removeClass('d-block');
+                    widthSetter()
+                });
+                $chatbox2.on('transitionend', function () {
+                    if ($chatbox2.hasClass('chatbox--closed')) $chatbox1.remove();
+                });
 
 
-        function widthSetter() {
-            var ch0W = $(".ch0").width() + 130;
+                function widthSetter() {
+                    var ch0W = $(".ch0").width() + 130;
 
-            if ($('.ch0').hasClass("d-none")) {
-                ch0W = 130
-            }
+                    if ($('.ch0').hasClass("d-none")) {
+                        ch0W = 130
+                    }
 
-            $(".ch1").css("right", ch0W + "px");
+                    $(".ch1").css("right", ch0W + "px");
 
-            var ch1W = $(".ch1").width() + ch0W + 30;
-
-
-            if ($('.ch1').hasClass("d-none")) {
-                ch1W = ch0W;
-            }
-
-            $(".ch2").css("right", ch1W + "px");
-
-        }
-
-        widthSetter();
-
-        function mq1(x) {
-            if (x.matches) { // If media query matches
-                $chatbox2.addClass('d-none');
-                $chatbox2.removeClass('d-block');
-            } else {
-                // document.body.style.backgroundColor = "pink";
-            }
-        }
-
-        var x = window.matchMedia("(max-width: 1200px)");
-        mq1(x); // Call listener function at run time
-        x.addListener(mq1); // Attach listener function on state changes
+                    var ch1W = $(".ch1").width() + ch0W + 30;
 
 
-        function mq2(x2) {
-            if (x2.matches) { // If media query matches
-                $chatbox1.addClass('d-none');
-                $chatbox1.removeClass('d-block');
-            } else {
-                // document.body.style.backgroundColor = "pink";
-            }
-        }
+                    if ($('.ch1').hasClass("d-none")) {
+                        ch1W = ch0W;
+                    }
 
-        var x2 = window.matchMedia("(max-width: 850px)");
-        mq2(x2); // Call listener function at run time
-        x2.addListener(mq2) // Attach listener function on state changes
+                    $(".ch2").css("right", ch1W + "px");
+
+                }
+
+                widthSetter();
+
+                function mq1(x) {
+                    if (x.matches) { // If media query matches
+                        $chatbox2.addClass('d-none');
+                        $chatbox2.removeClass('d-block');
+                    } else {
+                        // document.body.style.backgroundColor = "pink";
+                    }
+                }
+
+                var x = window.matchMedia("(max-width: 1200px)");
+                mq1(x); // Call listener function at run time
+                x.addListener(mq1); // Attach listener function on state changes
+
+
+                function mq2(x2) {
+                    if (x2.matches) { // If media query matches
+                        $chatbox1.addClass('d-none');
+                        $chatbox1.removeClass('d-block');
+                    } else {
+                        // document.body.style.backgroundColor = "pink";
+                    }
+                }
+
+                var x2 = window.matchMedia("(max-width: 850px)");
+                mq2(x2); // Call listener function at run time
+                x2.addListener(mq2) // Attach listener function on state changes
+        */
 
 
         toastr.options =

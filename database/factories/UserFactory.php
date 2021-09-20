@@ -22,14 +22,12 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-        if (!is_dir(public_path('storage/images/users/'))) {
-            mkdir(public_path('storage/images/users/'), 0755, true);
-        }
+
         $genders = array("male", "female", "other");
         return [
             'name'              => $this->faker->name(),
             'username'          => $this->faker->userName(),
-            'image'             => $this->faker->image('public/storage/images/users', 640, 480, null, false),
+            'image'             => '',
             'email'             => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password'          => bcrypt('12345678'), // password

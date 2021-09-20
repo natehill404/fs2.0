@@ -109,13 +109,13 @@
                         <!-- USER AVATAR CONTENT -->
                         <div class="user-avatar-content">
                             @if(Auth::user()->image)
-                                <img src="{{asset('storage/images/users/'.Auth::user()->image)}}" alt="profile"/>
+                                <img src="{{Auth::user()->avatar_image}}" alt="profile"/>
                             @elseif(Auth::user()->gender === "male")
                                 <img src="{{asset('img/profile/male.png')}}" alt="profile"/>
                             @elseif(Auth::user()->gender === "female")
                                 <img src="{{asset('img/profile/female.png')}}" alt="profile"/>
                             @else
-                                <img src="{{asset('img/profile/default.png')}}" alt="profile"/>
+                                <img src="{{Auth::user()->avatar_image}}" alt="profile"/>
                             @endif
 
                         </div>

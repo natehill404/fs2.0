@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\vendor\Chatify;
+namespace App\Http\Controllers\Vendor\Chatify;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;

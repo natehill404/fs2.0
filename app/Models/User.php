@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Avatar;
 use Multicaret\Acquaintances\Traits\Friendable;
 use Multicaret\Acquaintances\Traits\CanFollow;
 use Multicaret\Acquaintances\Traits\CanBeFollowed;
@@ -76,5 +77,14 @@ class User extends Authenticatable implements MustVerifyEmail
     public function profile()
     {
         return $this->hasOne(Profile::class, 'user_id');
+    }
+
+    public function getAvatarImageAttribute()
+    {
+        if ($this->image == ''){
+            return Avatar::create($this->name)->toBase64();
+        }else{
+            return  asset('storage/images/users/').$this->image;
+        }
     }
 }
