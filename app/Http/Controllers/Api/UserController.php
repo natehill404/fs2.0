@@ -7,10 +7,9 @@ use App\Models\Profile;
 use App\Models\User;
 use Exception;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\JsonResponse;
 
 class UserController extends Controller
 {
@@ -35,41 +34,48 @@ class UserController extends Controller
         Profile::create([
             'user_id' => $user->id,
         ]);
+        if ($user->gender === "male") {
+            $user->image = "storage/images/static/blank_profile_male.jpg";
+        } else if ($user->gender === "female") {
+            $user->image = "storage/images/static/blank_profile_female.jpg";
+        } else {
+            $user->image = "storage/images/static/default_profile.jpg";
+        }
+        $user->save();
         event(new Registered($user));
         return new JsonResponse(["success" => true, "message" => "New user created successfully", "user" => $user, "token" => $token->plainTextToken], 200);
     }
-
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param array $data
+     * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name'     => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255', 'unique:users'],
-            'email'    => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'gender'   => ['required', 'string', 'in:male,female,other']
+            'gender' => ['required', 'string', 'in:male,female,other']
         ]);
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param array $data
+     * @param  array  $data
      * @return \App\Models\User
      */
     protected function create(array $data)
     {
         return User::create([
-            'name'     => $data['name'],
+            'name' => $data['name'],
             'username' => $data['username'],
-            'email'    => $data['email'],
-            'gender'   => $data['gender'],
-            'password' => bcrypt($data['password']),
+            'email' => $data['email'],
+            'gender' => $data['gender'],
+            'password' => hash("sha256", $data['password']),
         ]);
     }
 
@@ -85,14 +91,14 @@ class UserController extends Controller
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'email'    => 'required|string',
+            'email' => 'required|string',
             'password' => 'required|string',
         ]);
         if ($validator->fails()) {
             return new JsonResponse(["success" => false, "messages" => $validator->getMessageBag()->getMessages()], 200);
         }
         $user = User::where('email', $request->email)->orWhere('username', $request->email)->first();
-        if ($user && Hash::check($request->password, $user->password)) {
+        if ($user && $user->password === hash("sha256", $request->password)) {
             $token = $user->createToken('web');
             if ($request->has('remember') && $request->input('remember') == true) {
                 setcookie("token", $token->plainTextToken, time() + 60 * 60 * 24 * 60, '/');
@@ -101,6 +107,7 @@ class UserController extends Controller
             }
             return new JsonResponse(["success" => true, "message" => "New user created successfully", "user" => $user, "token" => $token->plainTextToken], 200);
         } else {
+
             return new JsonResponse(["success" => false, "messages" => ['email' => ['Credentials not found in our records']]], 200);
         }
     }
@@ -117,10 +124,6 @@ class UserController extends Controller
     {
         $user = $request->user();
         $profile = $request->user()->profile;
-        if (!$profile) {
-            $profile = new Profile();
-            $profile->user_id = $request->user()->id;
-        }
         if ($request->has("city") && $request->input("city")) {
             $profile->city = $request->input("city");
         }
@@ -162,21 +165,18 @@ class UserController extends Controller
                 $image_type = explode("image/", $image_parts[0])[1];
                 $image_base64 = base64_decode($image_parts[1]);
 
-                if (!is_dir(public_path('storage/images/users/'))) {
-                    mkdir(public_path('storage/images/users/'), 0755, true);
-                }
-
                 $fileName = str_replace(' ', '-', round(microtime(true) * 1000) . $user->name . '.' . $image_type);
                 $imageFullPath = public_path() . "/storage/images/users/" . $fileName;
                 file_put_contents($imageFullPath, $image_base64);
 
-                $user->image = $fileName;
+                $user->image = "/storage/images/users/" . $fileName;
             } catch (Exception $e) {
                 $user->save();
                 return new JsonResponse(["success" => false, "message" => "Image not able to upload. " . $e->getMessage()], 200);
             }
             $user->save();
         }
+
 
         return new JsonResponse(["success" => true, "message" => "User profile updated successfuly"], 200);
     }

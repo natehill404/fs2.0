@@ -8,22 +8,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Avatar;
-use Multicaret\Acquaintances\Traits\Friendable;
-use Multicaret\Acquaintances\Traits\CanFollow;
-use Multicaret\Acquaintances\Traits\CanBeFollowed;
-use Multicaret\Acquaintances\Traits\CanLike;
-use Multicaret\Acquaintances\Traits\CanBeLiked;
-use Multicaret\Acquaintances\Traits\CanRate;
-use Multicaret\Acquaintances\Traits\CanBeRated;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
-    use Friendable;
-    use CanFollow, CanBeFollowed;
-    use CanLike, CanBeLiked;
-    use CanRate, CanBeRated;
 
     /**
      * The attributes that are mass assignable.
@@ -36,7 +24,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'password',
         'gender',
-        'image',
     ];
 
     /**
@@ -65,9 +52,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         if ($this->image) {
             try {
-                unlink(public_path() . 'storage/images/users/' . $this->image);
+                unlink(public_path() . $this->image);
                 return true;
-            } catch (Exception $exception) {
+            }
+            catch (Exception $e) {
                 return false;
             }
         }
@@ -79,12 +67,8 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Profile::class, 'user_id');
     }
 
-    public function getAvatarImageAttribute()
+    public function momments()
     {
-        if ($this->image == ''){
-            return Avatar::create($this->name)->toBase64();
-        }else{
-            return  asset('storage/images/users/').$this->image;
-        }
+        return $this->hasMany(Momment::class, 'user_id');
     }
 }

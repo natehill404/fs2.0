@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Momment;
 use App\Models\User;
+use App\Models\FriendRequest;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +13,7 @@ use Illuminate\Validation\Rule;
 
 class HomeController extends Controller
 {
+    private User $user;
     /**
      * Create a new controller instance.
      *
@@ -28,55 +31,38 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if (optional(Auth::user()->profile)->startup_skip) {
-            $friends = Auth::user()->getFriends($perPage = 5);
-            return view('home', compact('friends'));
+        if (Auth::user()->profile->startup_skip) {
+            $this->user = Auth::user();
+            $userMomments = $this->user->momments()->latest()->get();
+            $firendsMomments = [];
+            /* $allFriends = Auth::user()->firends;
+            foreach ($allMomments as $frndMomment) {
+                $momment = ["user" => $frndMomment->user, "momments" => $userMomments];
+                array_push($firendsMomments, $momment);
+            } */
+
+            return view('home', ["userMomments" => $userMomments]);
         }
         return redirect("/startup");
     }
 
     public function startup()
     {
-        if (optional(Auth::user()->profile)->startup_skip) {
+        if (Auth::user()->profile->startup_skip) {
             return redirect("/");
         }
-
-        return view('startup');
+        $friendSuggestions = User::where('email_verified_at', '!=', '')->where('id', '!=', auth()->user()->id)->orderBy('id','DESC')->take(12)->get(); 
+        return view('startup',compact('friendSuggestions'));
     }
 
-    public function profile()
-    {
-        return view('profile');
-    }
-
-    public function profileDetails($userName)
-    {
-        $user = User::where('username', $userName)->first();
-        if (!$user) {
-            return redirect()->back()->with('error', 'User not found!');
-        }
-        return view('profile-details', compact('user'));
-    }
-
-    public function timelineDetails($userName)
-    {
-        $user = User::where('username', $userName)->first();
-        if (!$user) {
-
-            return redirect()->back()->with('error', 'User not found!');
-        }
-        $friends = $user->getFriends($perPage = 5);
-        return view('profile-timeline', compact('user', 'friends'));
-    }
-
-    public function editProfile(Request $request)
+    public function profile(Request $request)
     {
         if ($request->isMethod('get')) {
-            return view('edit-profile');
+            return view('profile');
         } else if ($request->isMethod('put')) {
             $user = $request->user();
             $request->validate([
-                'name'     => ['required', 'string', 'max:255'],
+                'name' => ['required', 'string', 'max:255'],
                 'username' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($user->id)]
             ]);
             $user->name = $request->input('name');
@@ -97,48 +83,36 @@ class HomeController extends Controller
                     $imageFullPath = public_path() . "/storage/images/users/" . $fileName;
                     file_put_contents($imageFullPath, $image_base64);
 
-                    $user->image = $fileName;
+                    $user->image = "/storage/images/users/" . $fileName;
                 } catch (Exception $e) {
-                    return redirect('/edit-profile')->with("error", "Image not able to upload");
+                    return redirect('/profile')->with("error", "Image not able to upload");
                 }
             }
             $user->save();
-            return redirect('/edit-profile')->with("message", "Profile update successfuly");
+            return redirect('/profile')->with("message", "Profile update successfuly");
         }
     }
 
-
-    public function addFriend($userName)
-    {
-        try {
-            $user = Auth::user();
-            $friend = User::where('username', $userName)->first();
-            if (!$friend) {
-                return redirect()->back()->with('error', 'User not found!');
-            }
-            if ($user->befriend($friend)) {
-                return redirect()->back()->with('success', 'Request has been sent!');
-            }
-            return redirect()->back()->with('error', 'Add friend failed!');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
+    public function friendRequest(Request $request){
+        $friendRequest = FriendRequest::create([
+            'user_id' => auth()->user()->id,
+            'friend_id' => $request->friend_id,
+            'type' => 1,
+        ]);
+        if(!empty($friendRequest->id)){
+            return response()->json(['success' => true]);
         }
+        return response()->json(['success' => false]);
     }
-
-    public function removeFriend($userName)
-    {
-        try {
-            $user = Auth::user();
-            $friend = User::where('username', $userName)->first();
-            if (!$friend) {
-                return redirect()->back()->with('error', 'User not found!');
-            }
-            if ($user->unfriend($friend)) {
-                return redirect()->back()->with('success', 'Friend removed!');
-            }
-            return redirect()->back()->with('error', 'Friend remove failed!');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
+    
+    
+    public function acceptFriendRquest(Request $request){
+        $validate = FriendRequest::where('user_id',auth()->user()->id)->where('friend_id',$request->friend_id)->first();
+        if(!empty($validate)){
+            $validate->type = 2;
+            $validate->save();
+            return response()->json(['success' => true]);
         }
+        return response()->json(['success' => false ]);
     }
 }

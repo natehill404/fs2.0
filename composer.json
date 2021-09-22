@@ -11,15 +11,9 @@
         "laravel/framework": "^8.54",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
-        "laravel/ui": "^3.3",
-        "laravolt/avatar": "^4.1",
-        "livewire/livewire": "^2.5",
-        "multicaret/laravel-acquaintances": "^3.5",
-        "munafio/chatify": "^1.2",
-        "pusher/pusher-php-server": "^7.0"
+        "laravel/ui": "^3.3"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.6",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",
@@ -37,7 +31,10 @@
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
-        }
+        },
+        "files":[
+            "app/Library/Helper.php"
+        ]
     },
     "scripts": {
         "post-autoload-dump": [
